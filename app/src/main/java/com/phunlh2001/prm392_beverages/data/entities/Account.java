@@ -2,11 +2,13 @@ package com.phunlh2001.prm392_beverages.data.entities;
 
 import androidx.room.ColumnInfo;
 
+import java.io.Serializable;
+
 enum Role {
     Staff, User
 }
 
-public class Account {
+public class Account implements Serializable {
     private String email, username, password;
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     private byte[] avatar;
