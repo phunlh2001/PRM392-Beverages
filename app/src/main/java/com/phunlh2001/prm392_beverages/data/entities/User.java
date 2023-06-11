@@ -2,8 +2,11 @@ package com.phunlh2001.prm392_beverages.data.entities;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+
+import com.phunlh2001.prm392_beverages.data.entities.enums.RoleAccount;
 
 @Entity(tableName = "users",
         foreignKeys = @ForeignKey(
@@ -16,7 +19,7 @@ public class User extends Account {
     private double coupon;
     private int order_id, account_id;
 
-    public User(String email, String username, String password, byte[] avatar, Role role, int user_id, String full_name, double coupon, int order_id, int account_id) {
+    public User(String email, String username, String password, byte[] avatar, RoleAccount role, int user_id, String full_name, double coupon, int order_id, int account_id) {
         super(email, username, password, avatar, role);
         this.user_id = user_id;
         this.full_name = full_name;

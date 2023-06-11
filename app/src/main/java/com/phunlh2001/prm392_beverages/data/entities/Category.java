@@ -1,6 +1,7 @@
 package com.phunlh2001.prm392_beverages.data.entities;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -14,9 +15,6 @@ public class Category {
     public Category(int id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public Category() {
     }
 
     public int getId() {

@@ -1,20 +1,19 @@
 package com.phunlh2001.prm392_beverages.data.entities;
 
 import androidx.room.ColumnInfo;
+import androidx.room.Ignore;
+
+import com.phunlh2001.prm392_beverages.data.entities.enums.RoleAccount;
 
 import java.io.Serializable;
-
-enum Role {
-    Staff, User
-}
 
 public class Account implements Serializable {
     private String email, username, password;
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     private byte[] avatar;
-    private Role role;
+    private RoleAccount role;
 
-    public Account(String email, String username, String password, byte[] avatar, Role role) {
+    public Account(String email, String username, String password, byte[] avatar, RoleAccount role) {
         this.email = email;
         this.username = username;
         this.password = password;
@@ -54,13 +53,13 @@ public class Account implements Serializable {
         this.avatar = avatar;
     }
 
-    public Role getRole() {
+    public RoleAccount getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(RoleAccount role) {
         if (role == null) {
-            this.role = Role.User;
+            this.role = RoleAccount.USER;
         } else {
             this.role = role;
         }
