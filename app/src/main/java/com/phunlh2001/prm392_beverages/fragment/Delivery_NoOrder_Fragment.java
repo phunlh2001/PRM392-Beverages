@@ -17,7 +17,7 @@ public class Delivery_NoOrder_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_delivery__no_order_, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_delivery_no_order, container, false);
         Button btn = (Button) rootView.findViewById(R.id.btn_order_now);
         btn.setOnClickListener(v -> {
             Toast.makeText(rootView.getContext(), "Order delivery (coming soon)", Toast.LENGTH_SHORT).show();
