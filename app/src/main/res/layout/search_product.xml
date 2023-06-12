@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <android.widget.Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/backicon"
+            android:text="Search"
+            android:background="@drawable/button_style"/>
+
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="invisible"
+            android:text="Button test" />
+
+        <android.widget.Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginRight="0dp"
+            android:background="@drawable/action"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/store_image"
+            android:text="Dia chi giao hang" />
+
+        <SearchView
+            android:id="@+id/searchbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="What are you craving for?"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bogoc"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Popular drinks and foods"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginBottom="20dp"
+        android:shadowDy="@integer/material_motion_duration_medium_2"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_product"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/pure_black_new"/>
+            
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Product name"
+                android:textColor="@color/black"
+                android:layout_toEndOf="@+id/img_product"
+
+                android:layout_marginStart="20dp"/>
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+
+                android:layout_marginStart="20dp"
+
+                android:layout_toEndOf="@+id/img_product"
+                android:text="Price"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>
