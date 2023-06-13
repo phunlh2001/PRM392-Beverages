@@ -31,8 +31,4 @@ public class DeliveryMenuActivity extends AppCompatActivity {
         deliveryMenuAdapter.setData(_list);
         rcvMenu.setAdapter(deliveryMenuAdapter);
     }
-
-    private List<Product> getListProduct() {
-        return null;
-    }
 }
