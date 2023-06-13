@@ -1,5 +1,6 @@
 package com.phunlh2001.prm392_beverages.data.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -7,6 +8,9 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.phunlh2001.prm392_beverages.data.entities.Order;
+import com.phunlh2001.prm392_beverages.data.entities.Product;
+
+import java.util.List;
 
 @Dao
 public interface OrderDao {
@@ -20,8 +24,8 @@ public interface OrderDao {
     void delete(Order orders);
 
     @Query("SELECT * FROM orders")
-    void getAll();
+    LiveData<List<Order>> getAll();
 
     @Query("SELECT * FROM orders WHERE id=:id")
-    void getById(int id);
+    LiveData<Order> getById(int id);
 }

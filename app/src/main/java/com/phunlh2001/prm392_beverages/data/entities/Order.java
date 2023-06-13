@@ -2,12 +2,11 @@ package com.phunlh2001.prm392_beverages.data.entities;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-enum ShipTypes {
-    Delivery, Store_Pickup
-}
+import com.phunlh2001.prm392_beverages.data.entities.enums.OrderType;
 
 @Entity(tableName = "orders",
         foreignKeys = @ForeignKey(
@@ -18,10 +17,10 @@ public class Order {
     private int id;
     private double total_price;
     private int quantity_product;
-    private ShipTypes ship_type;
+    private OrderType ship_type;
     private int user_id;
 
-    public Order(int id, double total_price, int quantity_product, ShipTypes ship_type, int user_id) {
+    public Order(int id, double total_price, int quantity_product, OrderType ship_type, int user_id) {
         this.id = id;
         this.total_price = total_price;
         this.quantity_product = quantity_product;
@@ -61,14 +60,14 @@ public class Order {
         this.quantity_product = quantity_product;
     }
 
-    public ShipTypes getShip_type() {
+    public OrderType getShip_type() {
         return ship_type;
     }
 
-    public void setShip_type(ShipTypes ship_type) {
+    public void setShip_type(OrderType ship_type) {
         if (ship_type != null)
             this.ship_type = ship_type;
         else
-            this.ship_type = ShipTypes.Delivery;
+            this.ship_type = OrderType.DELIVERY;
     }
 }
