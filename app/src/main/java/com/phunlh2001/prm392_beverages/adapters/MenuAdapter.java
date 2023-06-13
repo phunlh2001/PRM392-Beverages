@@ -1,6 +1,7 @@
 package com.phunlh2001.prm392_beverages.adapters;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,10 @@ import java.util.List;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
     private List<Product> _products;
+    private Context context;
 
-    public MenuAdapter(List<Product> products) {
-        _products = products;
+    public MenuAdapter(Context context) {
+        this.context = context;
     }
 
     public void setData(List<Product> list) {
