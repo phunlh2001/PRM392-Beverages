@@ -2,15 +2,16 @@ package com.phunlh2001.prm392_beverages.data.entities;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import com.phunlh2001.prm392_beverages.data.entities.enums.OrderType;
 
-@Entity(tableName = "orders",
-        foreignKeys = @ForeignKey(
-                entity = Order.class, parentColumns = "id", childColumns = "user_id", onDelete = 1),
+@Entity(tableName = "Orders",
+        foreignKeys = @ForeignKey(entity = User.class,
+                parentColumns = "id",
+                childColumns = "user_id",
+                onDelete = ForeignKey.CASCADE),
         indices = @Index(value = "user_id"))
 public class Order {
     @PrimaryKey(autoGenerate = true)

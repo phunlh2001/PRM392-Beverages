@@ -1,29 +1,32 @@
 package com.phunlh2001.prm392_beverages.data.entities;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Ignore;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import com.phunlh2001.prm392_beverages.data.entities.enums.RoleAccount;
 
-
-@Entity(tableName = "staffs",
-        foreignKeys = @ForeignKey(
-            entity = Staff.class, parentColumns = "id", childColumns = "account_id", onDelete = 1),
-        indices = @Index(value = "account_id"))
-public class Staff extends Account {
+@Entity(tableName = "Staffs")
+public class Staff {
     @PrimaryKey(autoGenerate = true)
     private int id;
+    @NonNull
+    private String email, username, password;
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
+    private byte[] avatar;
+    private RoleAccount role;
+    @NonNull
     private String full_name;
-    private int account_id;
 
-    public Staff(String email, String username, String password, byte[] avatar, RoleAccount role, int id, String full_name, int account_id) {
-        super(email, username, password, avatar, role);
+    public Staff(int id, @NonNull String email, @NonNull String username, @NonNull String password, @NonNull byte[] avatar, RoleAccount role, @NonNull String full_name) {
         this.id = id;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.avatar = avatar;
+        this.role = role;
         this.full_name = full_name;
-        this.account_id = account_id;
     }
 
     public int getId() {
@@ -34,19 +37,60 @@ public class Staff extends Account {
         this.id = id;
     }
 
+    @NonNull
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@NonNull String email) {
+        this.email = email;
+    }
+
+    @NonNull
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(@NonNull String username) {
+        this.username = username;
+    }
+
+    @NonNull
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(@NonNull String password) {
+        this.password = password;
+    }
+
+    @NonNull
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(@NonNull byte[] avatar) {
+        this.avatar = avatar;
+    }
+
+    public RoleAccount getRole() {
+        return role;
+    }
+
+    public void setRole(RoleAccount role) {
+        if (role == null) {
+            this.role = RoleAccount.STAFF;
+        } else {
+            this.role = role;
+        }
+    }
+
+    @NonNull
     public String getFull_name() {
         return full_name;
     }
 
-    public void setFull_name(String full_name) {
+    public void setFull_name(@NonNull String full_name) {
         this.full_name = full_name;
-    }
-
-    public int getAccount_id() {
-        return account_id;
-    }
-
-    public void setAccount_id(int account_id) {
-        this.account_id = account_id;
     }
 }

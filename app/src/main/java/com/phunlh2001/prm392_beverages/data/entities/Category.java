@@ -1,18 +1,17 @@
 package com.phunlh2001.prm392_beverages.data.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import java.io.Serializable;
-
-@Entity(tableName = "categories")
+@Entity(tableName = "Categories")
 public class Category {
     @PrimaryKey(autoGenerate = true)
     private int id;
+    @NonNull
     private String name;
 
-    public Category(int id, String name) {
+    public Category(int id, @NonNull String name) {
         this.id = id;
         this.name = name;
     }
@@ -25,11 +24,12 @@ public class Category {
         this.id = id;
     }
 
+    @NonNull
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NonNull String name) {
         this.name = name;
     }
 }
