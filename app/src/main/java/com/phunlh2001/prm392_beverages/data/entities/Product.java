@@ -24,15 +24,14 @@ public class Product {
     @ColumnInfo(name = "description")
     @NonNull
     private String desc;
-    private double discount, price;
+    private double price;
     private int category_id;
 
-    public Product(int id, byte[] thumbnail, @NonNull String title, @NonNull String desc, double discount, double price, int category_id) {
+    public Product(int id, byte[] thumbnail, @NonNull String title, @NonNull String desc, double price, int category_id) {
         this.id = id;
         this.thumbnail = thumbnail;
         this.title = title;
         this.desc = desc;
-        this.discount = discount;
         this.price = price;
         this.category_id = category_id;
     }
@@ -69,14 +68,6 @@ public class Product {
 
     public void setDesc(@NonNull String desc) {
         this.desc = desc;
-    }
-
-    public double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(double discount) {
-        this.discount = discount;
     }
 
     public double getPrice() {
