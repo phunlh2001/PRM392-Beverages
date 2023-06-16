@@ -1,34 +1,37 @@
 package com.phunlh2001.prm392_beverages.data.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import java.io.Serializable;
-
-@Entity(tableName = "products",
+@Entity(tableName = "Products",
         foreignKeys = @ForeignKey(
-                entity = Product.class, parentColumns = "id", childColumns = "category_id", onDelete = 1),
+                entity = Category.class,
+                parentColumns = "id",
+                childColumns = "category_id",
+                onDelete = ForeignKey.CASCADE),
         indices = @Index(value = "category_id"))
-public class Product implements Serializable {
+public class Product {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     private byte[] thumbnail;
+    @NonNull
     private String title;
     @ColumnInfo(name = "description")
+    @NonNull
     private String desc;
-    private double discount, price;
+    private double price;
     private int category_id;
 
-    public Product(int id, byte[] thumbnail, String title, String desc, double discount, double price, int category_id) {
+    public Product(int id, byte[] thumbnail, @NonNull String title, @NonNull String desc, double price, int category_id) {
         this.id = id;
         this.thumbnail = thumbnail;
         this.title = title;
         this.desc = desc;
-        this.discount = discount;
         this.price = price;
         this.category_id = category_id;
     }
@@ -49,28 +52,22 @@ public class Product implements Serializable {
         this.thumbnail = thumbnail;
     }
 
+    @NonNull
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(@NonNull String title) {
         this.title = title;
     }
 
+    @NonNull
     public String getDesc() {
         return desc;
     }
 
-    public void setDesc(String desc) {
+    public void setDesc(@NonNull String desc) {
         this.desc = desc;
-    }
-
-    public double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(double discount) {
-        this.discount = discount;
     }
 
     public double getPrice() {
