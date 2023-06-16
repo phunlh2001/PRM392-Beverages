@@ -10,17 +10,15 @@ import androidx.room.TypeConverters;
 import com.phunlh2001.prm392_beverages.data.dao.CategoryDao;
 import com.phunlh2001.prm392_beverages.data.dao.OrderDao;
 import com.phunlh2001.prm392_beverages.data.dao.ProductDao;
-import com.phunlh2001.prm392_beverages.data.dao.StaffDao;
 import com.phunlh2001.prm392_beverages.data.dao.UserDao;
 import com.phunlh2001.prm392_beverages.data.entities.Category;
 import com.phunlh2001.prm392_beverages.data.entities.Order;
 import com.phunlh2001.prm392_beverages.data.entities.OrderDetail;
 import com.phunlh2001.prm392_beverages.data.entities.Product;
-import com.phunlh2001.prm392_beverages.data.entities.Staff;
 import com.phunlh2001.prm392_beverages.data.entities.User;
 import com.phunlh2001.prm392_beverages.utils.DateConverter;
 
-@Database(entities = {Category.class, Product.class, Staff.class, User.class, Order.class, OrderDetail.class},
+@Database(entities = {Category.class, Product.class, User.class, Order.class, OrderDetail.class},
         version = 1, exportSchema = false)
 @TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
@@ -39,7 +37,6 @@ public abstract class AppDatabase extends RoomDatabase {
     // DAOs
     public abstract ProductDao productDao();
     public abstract CategoryDao categoryDao();
-    public abstract StaffDao staffDao();
     public abstract UserDao userDao();
     public abstract OrderDao orderDao();
 }
