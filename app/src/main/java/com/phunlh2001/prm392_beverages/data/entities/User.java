@@ -1,46 +1,100 @@
 package com.phunlh2001.prm392_beverages.data.entities;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import com.phunlh2001.prm392_beverages.data.entities.enums.RoleAccount;
 
-@Entity(tableName = "users",
-        foreignKeys = @ForeignKey(
-                entity = User.class, parentColumns = "user_id", childColumns = "account_id", onDelete = 1),
-        indices = @Index(value = "account_id"))
-public class User extends Account {
+@Entity(tableName = "Users")
+public class User {
     @PrimaryKey(autoGenerate = true)
-    private int user_id;
+    private int id;
+    @NonNull
+    private String email, username, password;
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
+    private byte[] avatar;
+    private RoleAccount role;
+    @NonNull
     private String full_name;
     private double coupon;
-    private int order_id, account_id;
 
-    public User(String email, String username, String password, byte[] avatar, RoleAccount role, int user_id, String full_name, double coupon, int order_id, int account_id) {
-        super(email, username, password, avatar, role);
-        this.user_id = user_id;
+    public User(int id, @NonNull String email, @NonNull String username, @NonNull String password, @NonNull byte[] avatar, RoleAccount role, @NonNull String full_name, double coupon) {
+        this.id = id;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.avatar = avatar;
+        this.role = role;
         this.full_name = full_name;
         this.coupon = coupon;
-        this.order_id = order_id;
-        this.account_id = account_id;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getId() {
+        return id;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
+    @NonNull
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@NonNull String email) {
+        this.email = email;
+    }
+
+    @NonNull
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(@NonNull String username) {
+        this.username = username;
+    }
+
+    @NonNull
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(@NonNull String password) {
+        this.password = password;
+    }
+
+    @NonNull
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(@NonNull byte[] avatar) {
+        this.avatar = avatar;
+    }
+
+    public RoleAccount getRole() {
+        return role;
+    }
+
+    public void setRole(RoleAccount role) {
+        if (role == null) {
+            this.role = RoleAccount.USER;
+        } else {
+            this.role = role;
+        }
+    }
+
+    @NonNull
     public String getFull_name() {
         return full_name;
     }
 
-    public void setFull_name(String full_name) {
+    public void setFull_name(@NonNull String full_name) {
         this.full_name = full_name;
     }
 
@@ -50,21 +104,5 @@ public class User extends Account {
 
     public void setCoupon(double coupon) {
         this.coupon = coupon;
-    }
-
-    public int getOrder_id() {
-        return order_id;
-    }
-
-    public void setOrder_id(int order_id) {
-        this.order_id = order_id;
-    }
-
-    public int getAccount_id() {
-        return account_id;
-    }
-
-    public void setAccount_id(int account_id) {
-        this.account_id = account_id;
     }
 }
