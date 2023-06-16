@@ -7,10 +7,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
+import com.phunlh2001.prm392_beverages.adapters.ViewPagerOrderManagementAdapter;
 
 
 public class OrderManagement extends AppCompatActivity {

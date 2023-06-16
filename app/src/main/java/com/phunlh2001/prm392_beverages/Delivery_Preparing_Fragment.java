@@ -1,4 +1,4 @@
-package com.phunlh2001.prm392_beverages.fragment;
+package com.phunlh2001.prm392_beverages;
 
 import android.graphics.Color;
 import android.os.Bundle;

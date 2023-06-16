@@ -1,13 +1,13 @@
-package com.phunlh2001.prm392_beverages;
+package com.phunlh2001.prm392_beverages.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.phunlh2001.prm392_beverages.fragment.Delivery_Preparing_Fragment;
-import com.phunlh2001.prm392_beverages.fragment.Store_pickup_No_Order_Fragment;
-import com.phunlh2001.prm392_beverages.fragment.Store_pickup_Status_Fragment;
+import com.phunlh2001.prm392_beverages.Delivery_Preparing_Fragment;
+import com.phunlh2001.prm392_beverages.Store_pickup_No_Order_Fragment;
+import com.phunlh2001.prm392_beverages.Store_pickup_Status_Fragment;
 
 
 public class ViewPagerOrderManagementAdapter extends FragmentStateAdapter {

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#eff7ff"
     android:orientation="vertical"
-    tools:context=".fragment.Delivery_Preparing_Fragment">
+    tools:context=".Delivery_Preparing_Fragment">
 
     <!-- TODO: Update blank fragment layout -->
     <ScrollView
