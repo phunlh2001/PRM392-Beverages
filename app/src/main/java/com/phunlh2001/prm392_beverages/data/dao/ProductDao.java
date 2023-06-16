@@ -1,30 +1,35 @@
 package com.phunlh2001.prm392_beverages.data.dao;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.phunlh2001.prm392_beverages.data.entities.Product;
+import com.phunlh2001.prm392_beverages.data.entities.relationship.ProductWithOrdersRef;
 
 import java.util.List;
 
 @Dao
 public interface ProductDao {
     @Insert
-    void insert(Product product);
+    void insert(Product... product);
 
     @Update
     void update(Product product);
 
     @Delete
-    void delete(Product product);
+    void delete(Product... product);
 
     @Query("SELECT * FROM products")
-    LiveData<List<Product>> getAll();
+    List<Product> getAll();
 
     @Query("SELECT * FROM products WHERE id=:id")
-    LiveData<Product> getById(int id);
+    Product getById(int id);
+
+    @Transaction
+    @Query("SELECT * FROM products")
+    List<ProductWithOrdersRef> getAllOrderHaveProduct();
 }
