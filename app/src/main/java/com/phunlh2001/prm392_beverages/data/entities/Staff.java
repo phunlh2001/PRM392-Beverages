@@ -12,21 +12,19 @@ public class Staff {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @NonNull
-    private String email, username, password;
+    private String email, username, password, full_name;
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     private byte[] avatar;
     private RoleAccount role;
-    @NonNull
-    private String full_name;
 
-    public Staff(int id, @NonNull String email, @NonNull String username, @NonNull String password, @NonNull byte[] avatar, RoleAccount role, @NonNull String full_name) {
+    public Staff(int id, @NonNull String email, @NonNull String username, @NonNull String password, @NonNull String full_name, byte[] avatar, RoleAccount role) {
         this.id = id;
         this.email = email;
         this.username = username;
         this.password = password;
+        this.full_name = full_name;
         this.avatar = avatar;
         this.role = role;
-        this.full_name = full_name;
     }
 
     public int getId() {
@@ -64,12 +62,11 @@ public class Staff {
         this.password = password;
     }
 
-    @NonNull
     public byte[] getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(@NonNull byte[] avatar) {
+    public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
     }
 
