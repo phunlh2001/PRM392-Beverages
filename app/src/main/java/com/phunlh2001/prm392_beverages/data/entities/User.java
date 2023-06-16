@@ -16,9 +16,8 @@ public class User {
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     private byte[] avatar;
     private RoleAccount role;
-    private double coupon;
 
-    public User(int id, @NonNull String email, @NonNull String username, @NonNull String password, @NonNull String full_name, byte[] avatar, RoleAccount role, double coupon) {
+    public User(int id, @NonNull String email, @NonNull String username, @NonNull String password, @NonNull String full_name, byte[] avatar, RoleAccount role) {
         this.id = id;
         this.email = email;
         this.username = username;
@@ -26,7 +25,6 @@ public class User {
         this.full_name = full_name;
         this.avatar = avatar;
         this.role = role;
-        this.coupon = coupon;
     }
 
     public int getId() {
@@ -91,13 +89,5 @@ public class User {
 
     public void setFull_name(@NonNull String full_name) {
         this.full_name = full_name;
-    }
-
-    public double getCoupon() {
-        return coupon;
-    }
-
-    public void setCoupon(double coupon) {
-        this.coupon = coupon;
     }
 }
