@@ -22,16 +22,21 @@ import com.phunlh2001.prm392_beverages.utils.DateConverter;
         version = 1, exportSchema = false)
 @TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
+    private static final String DB_NAME = "Beverages.db";
     private static AppDatabase INSTANCE;
 
-    public static /* synchronized */ AppDatabase getInstance(Context context) {
+    public static synchronized AppDatabase getInstance(Context context) {
         if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "Beverages")
+            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DB_NAME)
                     .allowMainThreadQueries()
-//                    .createFromAsset("database/db.json")
+                    .createFromAsset("database/data.db")
                     .build();
         }
         return INSTANCE;
+    }
+
+    public void destroyInstance() {
+        INSTANCE = null;
     }
 
     // DAOs
