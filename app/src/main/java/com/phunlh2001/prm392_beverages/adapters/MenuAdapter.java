@@ -18,7 +18,7 @@ import java.util.List;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
     private List<Product> _products;
-    private Context context;
+    private final Context context;
 
     public MenuAdapter(Context context) {
         this.context = context;
@@ -41,7 +41,11 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         Product prod = _products.get(position);
         if (prod == null) return;
 
-//        holder.thumbnail.setImageResource(prod.getThumbnail());
+        @SuppressLint("DiscouragedApi")
+        int resourceId = context.getResources()
+                .getIdentifier(prod.getThumbnail(), "drawable", context.getPackageName());
+
+        holder.thumbnail.setImageResource(resourceId);
         holder.title.setText(prod.getTitle());
         holder.price.setText("" + prod.getPrice());
     }
