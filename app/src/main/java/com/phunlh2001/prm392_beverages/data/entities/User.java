@@ -1,33 +1,60 @@
 package com.phunlh2001.prm392_beverages.data.entities;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.phunlh2001.prm392_beverages.data.entities.enums.RoleAccount;
+
+import java.util.Date;
 
 @Entity(tableName = "Users")
 public class User {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @NonNull
-    private String email, username, password, full_name;
+    private String email, password, full_name, address, phone_number;
     @ColumnInfo(name = "avatar", defaultValue = "blank_avatar.jpg")
     private String avatar;
     private RoleAccount role;
+    @ColumnInfo(name = "createAt", defaultValue = "(datetime('now', 'localtime'))")
+    private Date createAt;
 
-    public User(@NonNull String email, @NonNull String username, @NonNull String password, @NonNull String full_name, String avatar, RoleAccount role) {
+    public User(@NonNull String email, @NonNull String password, @NonNull String full_name, @NonNull String address, @NonNull String phone_number, String avatar, RoleAccount role) {
         this.email = email;
-        this.username = username;
         this.password = password;
         this.full_name = full_name;
+        this.address = address;
+        this.phone_number = phone_number;
         this.avatar = avatar;
         this.role = role;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    @NonNull
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(@NonNull String address) {
+        this.address = address;
+    }
+
+    @NonNull
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(@NonNull String phone_number) {
+        this.phone_number = phone_number;
     }
 
     public int getId() {
@@ -53,15 +80,6 @@ public class User {
 
     public void setEmail(@NonNull String email) {
         this.email = email;
-    }
-
-    @NonNull
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(@NonNull String username) {
-        this.username = username;
     }
 
     @NonNull
