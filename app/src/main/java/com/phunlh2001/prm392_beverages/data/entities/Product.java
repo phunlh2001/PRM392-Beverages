@@ -1,9 +1,13 @@
 package com.phunlh2001.prm392_beverages.data.entities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -17,8 +21,8 @@ import androidx.room.PrimaryKey;
 public class Product {
     @PrimaryKey(autoGenerate = true)
     private int id;
-    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
-    private byte[] thumbnail;
+    @NonNull
+    private String thumbnail;
     @NonNull
     private String title;
     @ColumnInfo(name = "description")
@@ -27,8 +31,7 @@ public class Product {
     private double price;
     private int category_id;
 
-    public Product(int id, byte[] thumbnail, @NonNull String title, @NonNull String desc, double price, int category_id) {
-        this.id = id;
+    public Product(@NonNull String thumbnail, @NonNull String title, @NonNull String desc, double price, int category_id) {
         this.thumbnail = thumbnail;
         this.title = title;
         this.desc = desc;
@@ -44,11 +47,12 @@ public class Product {
         this.id = id;
     }
 
-    public byte[] getThumbnail() {
+    @NonNull
+    public String getThumbnail() {
         return thumbnail;
     }
 
-    public void setThumbnail(byte[] thumbnail) {
+    public void setThumbnail(@NonNull String thumbnail) {
         this.thumbnail = thumbnail;
     }
 

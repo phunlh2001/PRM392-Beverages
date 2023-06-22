@@ -1,8 +1,12 @@
 package com.phunlh2001.prm392_beverages.data.entities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.phunlh2001.prm392_beverages.data.entities.enums.RoleAccount;
@@ -13,12 +17,11 @@ public class User {
     private int id;
     @NonNull
     private String email, username, password, full_name;
-    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
-    private byte[] avatar;
+    @ColumnInfo(name = "avatar", defaultValue = "blank_avatar.jpg")
+    private String avatar;
     private RoleAccount role;
 
-    public User(int id, @NonNull String email, @NonNull String username, @NonNull String password, @NonNull String full_name, byte[] avatar, RoleAccount role) {
-        this.id = id;
+    public User(@NonNull String email, @NonNull String username, @NonNull String password, @NonNull String full_name, String avatar, RoleAccount role) {
         this.email = email;
         this.username = username;
         this.password = password;
@@ -33,6 +36,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     @NonNull
@@ -60,14 +71,6 @@ public class User {
 
     public void setPassword(@NonNull String password) {
         this.password = password;
-    }
-
-    public byte[] getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(byte[] avatar) {
-        this.avatar = avatar;
     }
 
     public RoleAccount getRole() {
