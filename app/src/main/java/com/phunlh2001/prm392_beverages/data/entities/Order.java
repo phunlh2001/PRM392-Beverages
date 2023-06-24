@@ -21,19 +21,10 @@ public class Order {
     private OrderType ship_type;
     private int user_id;
 
-    public Order(int id, double total_price, int quantity_product, OrderType ship_type, int user_id) {
-        this.id = id;
+    public Order(double total_price, int quantity_product, OrderType ship_type, int user_id) {
         this.total_price = total_price;
         this.quantity_product = quantity_product;
         this.ship_type = ship_type;
-        this.user_id = user_id;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
 
@@ -43,6 +34,14 @@ public class Order {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public double getTotal_price() {

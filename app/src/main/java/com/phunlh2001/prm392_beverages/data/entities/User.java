@@ -1,10 +1,12 @@
 package com.phunlh2001.prm392_beverages.data.entities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Index;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.phunlh2001.prm392_beverages.data.entities.enums.RoleAccount;
@@ -14,23 +16,18 @@ public class User {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @NonNull
-    private String email, username, password;
-    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
-    private byte[] avatar;
+    private String email, username, password, full_name;
+    @ColumnInfo(name = "avatar", defaultValue = "blank_avatar.jpg")
+    private String avatar;
     private RoleAccount role;
-    @NonNull
-    private String full_name;
-    private double coupon;
 
-    public User(int id, @NonNull String email, @NonNull String username, @NonNull String password, @NonNull byte[] avatar, RoleAccount role, @NonNull String full_name, double coupon) {
-        this.id = id;
+    public User(@NonNull String email, @NonNull String username, @NonNull String password, @NonNull String full_name, String avatar, RoleAccount role) {
         this.email = email;
         this.username = username;
         this.password = password;
+        this.full_name = full_name;
         this.avatar = avatar;
         this.role = role;
-        this.full_name = full_name;
-        this.coupon = coupon;
     }
 
     public int getId() {
@@ -39,6 +36,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     @NonNull
@@ -68,15 +73,6 @@ public class User {
         this.password = password;
     }
 
-    @NonNull
-    public byte[] getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(@NonNull byte[] avatar) {
-        this.avatar = avatar;
-    }
-
     public RoleAccount getRole() {
         return role;
     }
@@ -96,13 +92,5 @@ public class User {
 
     public void setFull_name(@NonNull String full_name) {
         this.full_name = full_name;
-    }
-
-    public double getCoupon() {
-        return coupon;
-    }
-
-    public void setCoupon(double coupon) {
-        this.coupon = coupon;
     }
 }
