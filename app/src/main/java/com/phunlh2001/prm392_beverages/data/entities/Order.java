@@ -1,11 +1,14 @@
 package com.phunlh2001.prm392_beverages.data.entities;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import com.phunlh2001.prm392_beverages.data.entities.enums.OrderType;
+
+import java.util.Date;
 
 @Entity(tableName = "Orders",
         foreignKeys = @ForeignKey(entity = User.class,
@@ -20,21 +23,22 @@ public class Order {
     private int quantity_product;
     private OrderType ship_type;
     private int user_id;
+    @ColumnInfo(name = "createAt", defaultValue = "(datetime('now', 'localtime'))")
+    private Date createAt;
 
-    public Order(int id, double total_price, int quantity_product, OrderType ship_type, int user_id) {
-        this.id = id;
+    public Order(double total_price, int quantity_product, OrderType ship_type, int user_id) {
         this.total_price = total_price;
         this.quantity_product = quantity_product;
         this.ship_type = ship_type;
         this.user_id = user_id;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public Date getCreateAt() {
+        return createAt;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
 
     public int getId() {
@@ -43,6 +47,14 @@ public class Order {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public double getTotal_price() {

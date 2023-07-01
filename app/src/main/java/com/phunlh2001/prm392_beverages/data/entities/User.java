@@ -3,34 +3,58 @@ package com.phunlh2001.prm392_beverages.data.entities;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import com.phunlh2001.prm392_beverages.data.entities.enums.RoleAccount;
+
+import java.util.Date;
 
 @Entity(tableName = "Users")
 public class User {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @NonNull
-    private String email, username, password;
-    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
-    private byte[] avatar;
+    private String email, password, full_name, address, phone_number;
+    @ColumnInfo(name = "avatar", defaultValue = "blank_avatar.jpg")
+    private String avatar;
     private RoleAccount role;
-    @NonNull
-    private String full_name;
-    private double coupon;
+    @ColumnInfo(name = "createAt", defaultValue = "(datetime('now', 'localtime'))")
+    private Date createAt;
 
-    public User(int id, @NonNull String email, @NonNull String username, @NonNull String password, @NonNull byte[] avatar, RoleAccount role, @NonNull String full_name, double coupon) {
-        this.id = id;
+    public User(@NonNull String email, @NonNull String password, @NonNull String full_name, @NonNull String address, @NonNull String phone_number, String avatar, RoleAccount role) {
         this.email = email;
-        this.username = username;
         this.password = password;
+        this.full_name = full_name;
+        this.address = address;
+        this.phone_number = phone_number;
         this.avatar = avatar;
         this.role = role;
-        this.full_name = full_name;
-        this.coupon = coupon;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    @NonNull
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(@NonNull String address) {
+        this.address = address;
+    }
+
+    @NonNull
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(@NonNull String phone_number) {
+        this.phone_number = phone_number;
     }
 
     public int getId() {
@@ -39,6 +63,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     @NonNull
@@ -51,30 +83,12 @@ public class User {
     }
 
     @NonNull
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(@NonNull String username) {
-        this.username = username;
-    }
-
-    @NonNull
     public String getPassword() {
         return password;
     }
 
     public void setPassword(@NonNull String password) {
         this.password = password;
-    }
-
-    @NonNull
-    public byte[] getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(@NonNull byte[] avatar) {
-        this.avatar = avatar;
     }
 
     public RoleAccount getRole() {
@@ -96,13 +110,5 @@ public class User {
 
     public void setFull_name(@NonNull String full_name) {
         this.full_name = full_name;
-    }
-
-    public double getCoupon() {
-        return coupon;
-    }
-
-    public void setCoupon(double coupon) {
-        this.coupon = coupon;
     }
 }

@@ -11,8 +11,7 @@ public class Category {
     @NonNull
     private String name;
 
-    public Category(int id, @NonNull String name) {
-        this.id = id;
+    public Category(@NonNull String name) {
         this.name = name;
     }
 
