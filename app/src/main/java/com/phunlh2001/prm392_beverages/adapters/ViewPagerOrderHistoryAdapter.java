@@ -6,27 +6,24 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.phunlh2001.prm392_beverages.Delivery_Preparing_Fragment;
+import com.phunlh2001.prm392_beverages.OrderHistory_Delivery_Fragment;
+import com.phunlh2001.prm392_beverages.OrderHistory_StorePickup_Fragment;
 import com.phunlh2001.prm392_beverages.Store_pickup_No_Order_Fragment;
-import com.phunlh2001.prm392_beverages.Store_pickup_Status_Fragment;
 
-
-public class ViewPagerOrderManagementAdapter extends FragmentStateAdapter {
-
-
-    public ViewPagerOrderManagementAdapter(@NonNull FragmentActivity fragmentActivity) {
+public class ViewPagerOrderHistoryAdapter extends FragmentStateAdapter {
+    public ViewPagerOrderHistoryAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
-
     @NonNull
     @Override
     public Fragment createFragment(int position) {
         switch (position){
             case 0:
-                return new Store_pickup_No_Order_Fragment();
-                //return new Store_pickup_Status_Fragment();
+                return new OrderHistory_StorePickup_Fragment();
             case 1:
                 //return new Delivery_NoOrder_Fragment();\
-                return new Delivery_Preparing_Fragment();
+                return new OrderHistory_Delivery_Fragment();
+
             default:
                 return new Store_pickup_No_Order_Fragment();
         }
@@ -36,6 +33,4 @@ public class ViewPagerOrderManagementAdapter extends FragmentStateAdapter {
     public int getItemCount() {
         return 2;
     }
-
-
 }

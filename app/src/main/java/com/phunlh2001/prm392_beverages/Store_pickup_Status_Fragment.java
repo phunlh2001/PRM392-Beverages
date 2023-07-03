@@ -13,8 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.phunlh2001.prm392_beverages.R;
-
 
 public class Store_pickup_Status_Fragment extends Fragment {
     @Override
@@ -38,7 +36,7 @@ public class Store_pickup_Status_Fragment extends Fragment {
 
         //
         location.setText("10:00, Today");
-        imgTime.setImageResource(R.drawable.img_home);
+        imgTime.setImageResource(R.drawable.img_clock);
 
         //Onclick LinearLayout to go Order Detail
         LinearLayout orderDetail = (LinearLayout) view.findViewById(R.id.order_detail);

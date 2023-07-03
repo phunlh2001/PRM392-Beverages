@@ -1,32 +1,32 @@
 package com.phunlh2001.prm392_beverages;
 
-import android.content.Intent;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager2.widget.ViewPager2;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
-
 import com.google.android.material.tabs.TabLayout;
+import com.phunlh2001.prm392_beverages.adapters.ViewPagerOrderHistoryAdapter;
 import com.phunlh2001.prm392_beverages.adapters.ViewPagerOrderManagementAdapter;
 
-
-public class OrderManagement extends AppCompatActivity {
+public class OrderHistory extends AppCompatActivity {
     TabLayout mTabLayout;
     ViewPager2 viewPager2;
-    ViewPagerOrderManagementAdapter viewPagerOrderManagementAdapter;
+    ViewPagerOrderHistoryAdapter viewPagerOrderHistoryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_management);
+        setContentView(R.layout.activity_order_history);
 
-        /*Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);*/
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //Fragment
         //Test fragment order management
         mTabLayout = findViewById(R.id.tab_layout);
@@ -35,8 +35,8 @@ public class OrderManagement extends AppCompatActivity {
         mTabLayout.addTab(mTabLayout.newTab().setText("Delivery"));
 
         viewPager2= findViewById(R.id.view_pager);
-        viewPagerOrderManagementAdapter = new ViewPagerOrderManagementAdapter(this);
-        viewPager2.setAdapter(viewPagerOrderManagementAdapter);
+        viewPagerOrderHistoryAdapter = new ViewPagerOrderHistoryAdapter(this);
+        viewPager2.setAdapter(viewPagerOrderHistoryAdapter);
 
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -63,22 +63,29 @@ public class OrderManagement extends AppCompatActivity {
             }
         });
 
-
+        //RCV in fragment
+        //replaceFragment(new OrderHistory_Delivery_Fragment());
     }
 
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, fragment);
+        fragmentTransaction.commit();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.order_management_menu, menu);
+        getMenuInflater().inflate(R.menu.order_history_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.history) {
-            Intent intent = new Intent(this, OrderHistory.class);
-            startActivity(intent);
-        } else if (id == R.id.action1) {
+        if(id == android.R.id.home){
+            finish();
+        }
+        if (id == R.id.action1) {
             Toast.makeText(this, "Action 1 clicked", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.action2) {
             Toast.makeText(this, "Action 2 clicked", Toast.LENGTH_SHORT).show();
@@ -88,4 +95,3 @@ public class OrderManagement extends AppCompatActivity {
         return true;
     }
 }
-
