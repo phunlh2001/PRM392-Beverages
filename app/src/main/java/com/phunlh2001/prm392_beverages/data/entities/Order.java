@@ -20,7 +20,6 @@ public class Order {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private double total_price;
-    private int quantity_product;
     private OrderType ship_type;
     private int user_id;
     @ColumnInfo(name = "createAt", defaultValue = "(datetime('now', 'localtime'))")
@@ -28,7 +27,6 @@ public class Order {
 
     public Order(double total_price, int quantity_product, OrderType ship_type, int user_id) {
         this.total_price = total_price;
-        this.quantity_product = quantity_product;
         this.ship_type = ship_type;
         this.user_id = user_id;
     }
@@ -63,14 +61,6 @@ public class Order {
 
     public void setTotal_price(double total_price) {
         this.total_price = total_price;
-    }
-
-    public int getQuantity_product() {
-        return quantity_product;
-    }
-
-    public void setQuantity_product(int quantity_product) {
-        this.quantity_product = quantity_product;
     }
 
     public OrderType getShip_type() {

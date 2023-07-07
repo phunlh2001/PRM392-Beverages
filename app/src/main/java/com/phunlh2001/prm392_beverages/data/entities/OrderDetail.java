@@ -23,4 +23,29 @@ import androidx.room.Index;
 public class OrderDetail {
     public int product_id;
     public int order_id;
+    private int quantity_product;
+    private double totalItemPrice;
+    public OrderDetail() {
+    }
+
+    public OrderDetail(int quantity_product, double totalItemPrice) {
+        this.quantity_product = quantity_product;
+        this.totalItemPrice = totalItemPrice;
+    }
+
+    public int getQuantity_product() {
+        return quantity_product;
+    }
+
+    public void setQuantity_product(int quantity_product) {
+        this.quantity_product = quantity_product;
+    }
+
+    public double getTotalItemPrice() {
+        return totalItemPrice;
+    }
+
+    public void setTotalItemPrice(double totalItemPrice) {
+        this.totalItemPrice = totalItemPrice;
+    }
 }

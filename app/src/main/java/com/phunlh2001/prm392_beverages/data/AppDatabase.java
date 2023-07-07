@@ -7,6 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import com.phunlh2001.prm392_beverages.data.dao.CartDao;
 import com.phunlh2001.prm392_beverages.data.dao.CategoryDao;
 import com.phunlh2001.prm392_beverages.data.dao.OrderDao;
 import com.phunlh2001.prm392_beverages.data.dao.ProductDao;
@@ -44,4 +45,5 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract CategoryDao categoryDao();
     public abstract UserDao userDao();
     public abstract OrderDao orderDao();
+    public abstract CartDao cartDao();
 }
