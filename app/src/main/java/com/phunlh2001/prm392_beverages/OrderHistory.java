@@ -15,6 +15,12 @@ import android.widget.Toast;
 import com.google.android.material.tabs.TabLayout;
 import com.phunlh2001.prm392_beverages.adapters.ViewPagerOrderHistoryAdapter;
 import com.phunlh2001.prm392_beverages.adapters.ViewPagerOrderManagementAdapter;
+import com.phunlh2001.prm392_beverages.data.AppDatabase;
+import com.phunlh2001.prm392_beverages.data.entities.Category;
+import com.phunlh2001.prm392_beverages.data.entities.Order;
+import com.phunlh2001.prm392_beverages.data.entities.Product;
+
+import java.util.List;
 
 public class OrderHistory extends AppCompatActivity {
     TabLayout mTabLayout;
@@ -29,6 +35,7 @@ public class OrderHistory extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //Fragment
         //Test fragment order management
+        Category mListOrder = AppDatabase.getInstance(this).categoryDao().getById(1);
         mTabLayout = findViewById(R.id.tab_layout);
         mTabLayout.setTabIndicatorFullWidth(true);
         mTabLayout.addTab(mTabLayout.newTab().setText("Store pickup"));

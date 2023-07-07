@@ -9,7 +9,7 @@
       >
     </item>
     <item android:id="@+id/order"
-        android:icon="@drawable/img_home_bottomnav"
+        android:icon="@drawable/img_order_bottomnav"
         >
     </item>
     <item android:id="@+id/profile"
