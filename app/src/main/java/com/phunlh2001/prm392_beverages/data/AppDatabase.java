@@ -2,6 +2,7 @@ package com.phunlh2001.prm392_beverages.data;
 
 import android.content.Context;
 
+import androidx.room.AutoMigration;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -19,17 +20,17 @@ import com.phunlh2001.prm392_beverages.data.entities.User;
 import com.phunlh2001.prm392_beverages.utils.DateConverter;
 
 @Database(entities = {Category.class, Product.class, User.class, Order.class, OrderDetail.class},
-        version = 1, exportSchema = false)
+        version = 3, exportSchema = false)
 @TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
-    private static final String DB_NAME = "Beverages.db";
+    private static final String DB_NAME = "_beverages.db";
     private static AppDatabase INSTANCE;
 
     public static synchronized AppDatabase getInstance(Context context) {
         if (INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DB_NAME)
                     .allowMainThreadQueries()
-                    .createFromAsset("database/data.db")
+                    .createFromAsset("database/_data.db")
                     .build();
         }
         return INSTANCE;
