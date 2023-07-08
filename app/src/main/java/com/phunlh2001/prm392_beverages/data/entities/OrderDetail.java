@@ -23,4 +23,5 @@ import androidx.room.Index;
 public class OrderDetail {
     public int product_id;
     public int order_id;
+    public int quantity;
 }

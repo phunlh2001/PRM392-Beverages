@@ -15,7 +15,7 @@ public class User {
     private int id;
     @NonNull
     private String email, password, full_name, address, phone_number;
-    @ColumnInfo(name = "avatar", defaultValue = "blank_avatar.jpg")
+    @ColumnInfo(name = "avatar", defaultValue = "'blank_avatar.jpg'")
     private String avatar;
     private RoleAccount role;
     @ColumnInfo(name = "createAt", defaultValue = "(datetime('now', 'localtime'))")
