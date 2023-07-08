@@ -12,18 +12,12 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.phunlh2001.prm392_beverages.R;
-import com.phunlh2001.prm392_beverages.data.AppDatabase;
-import com.phunlh2001.prm392_beverages.data.dao.OrderDao;
-import com.phunlh2001.prm392_beverages.data.entities.Order;
-
-import java.util.List;
 
 
 public class Delivery_Preparing_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_delivery_stauts, container, false);
         TextView status = (TextView) view.findViewById(R.id.status_order);
