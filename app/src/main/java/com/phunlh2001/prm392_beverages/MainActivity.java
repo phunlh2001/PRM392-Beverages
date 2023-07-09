@@ -3,19 +3,19 @@ package com.phunlh2001.prm392_beverages;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.phunlh2001.prm392_beverages.data.AppDatabase;
 import com.phunlh2001.prm392_beverages.data.dao.ProductDao;
-import com.phunlh2001.prm392_beverages.data.entities.Product;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView tvMain;
+    ProductDao dao;
 
     private void init() {
         tvMain = findViewById(R.id.tvMain);
+        dao = AppDatabase.getInstance(MainActivity.this).productDao();
     }
 
     @Override
@@ -24,6 +24,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         init();
 
-//        tvMain.setText(AppDatabase.getInstance(this).productDao().getById(1).getTitle());
+        tvMain.setText(dao.getById(1).getTitle());
     }
 }
