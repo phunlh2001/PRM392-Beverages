@@ -20,7 +20,7 @@ import androidx.room.PrimaryKey;
                 childColumns = "category_id",
                 onDelete = ForeignKey.CASCADE),
         indices = @Index(value = "category_id"))
-public class Product implements Parcelable {
+public class Product {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @NonNull
@@ -40,28 +40,6 @@ public class Product implements Parcelable {
         this.price = price;
         this.category_id = category_id;
     }
-
-    protected Product(Parcel in) {
-        id = in.readInt();
-        thumbnail = in.readString();
-        title = in.readString();
-        desc = in.readString();
-        price = in.readDouble();
-        category_id = in.readInt();
-    }
-
-    public static final Creator<Product> CREATOR = new Creator<Product>() {
-        @Override
-        public Product createFromParcel(Parcel in) {
-            return new Product(in);
-        }
-
-        @Override
-        public Product[] newArray(int size) {
-            return new Product[size];
-        }
-    };
-
     public int getId() {
         return id;
     }
@@ -111,18 +89,5 @@ public class Product implements Parcelable {
 
     public void setCategory_id(int category_id) {
         this.category_id = category_id;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(@NonNull Parcel parcel, int i) {
-        parcel.writeString(thumbnail);
-        parcel.writeString(title);
-        parcel.writeDouble(price);
-        parcel.writeString(desc);
     }
 }

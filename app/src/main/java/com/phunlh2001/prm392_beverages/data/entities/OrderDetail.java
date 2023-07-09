@@ -23,22 +23,31 @@ import androidx.room.Index;
 public class OrderDetail {
     public int product_id;
     public int order_id;
-    private int quantity_product;
+    public int quantity;
     private double totalItemPrice;
-    public OrderDetail() {
+
+    public int getProduct_id() {
+        return product_id;
     }
 
-    public OrderDetail(int quantity_product, double totalItemPrice) {
-        this.quantity_product = quantity_product;
-        this.totalItemPrice = totalItemPrice;
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
     }
 
-    public int getQuantity_product() {
-        return quantity_product;
+    public int getOrder_id() {
+        return order_id;
     }
 
-    public void setQuantity_product(int quantity_product) {
-        this.quantity_product = quantity_product;
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public double getTotalItemPrice() {

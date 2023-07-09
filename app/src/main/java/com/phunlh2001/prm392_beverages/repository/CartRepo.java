@@ -1,4 +1,4 @@
-package com.phunlh2001.prm392_beverages.data.repository;
+package com.phunlh2001.prm392_beverages.repository;
 
 import android.app.Application;
 
@@ -14,19 +14,19 @@ import java.util.concurrent.Executors;
 
 public class CartRepo {
     private CartDao cartDao;
-    private LiveData<List<Product>> allCartItemLiveData;
+    private LiveData<List<Product>> allCartItemsLiveData;
     private Executor executor = Executors.newSingleThreadExecutor();
 
-    public LiveData<List<Product>> getAllCartItemLiveData() {
-        return allCartItemLiveData;
+    public LiveData<List<Product>> getAllCartItemsLiveData() {
+        return allCartItemsLiveData;
     }
 
-    public CartRepo(Application application) {
+    public CartRepo(Application application){
         cartDao = AppDatabase.getInstance(application).cartDao();
-        allCartItemLiveData = cartDao.getAllCartItems();
+        allCartItemsLiveData = cartDao.getAllCartItems();
     }
 
-    public void insertCartItem(Product product) {
+    public void insertCartItem(Product product){
         executor.execute(new Runnable() {
             @Override
             public void run() {
@@ -35,7 +35,7 @@ public class CartRepo {
         });
     }
 
-    public void deleteCartItem(Product product) {
+    public void deleteCartItem(Product product){
         executor.execute(new Runnable() {
             @Override
             public void run() {
@@ -44,7 +44,7 @@ public class CartRepo {
         });
     }
 
-    public void updateQuantity(int id, int quantity) {
+    public void updateQuantity(int id , int quantity) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
@@ -53,11 +53,20 @@ public class CartRepo {
         });
     }
 
-    public void updateTotalPrice(int id, double totalItemPrice) {
+    public void updatePrice(int id , double price){
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                cartDao.updatePrice(id, totalItemPrice);
+                cartDao.updatePrice(id , price);
+            }
+        });
+    }
+
+    public void deleteAllCartItems(){
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                cartDao.deleteAllItems();
             }
         });
     }
