@@ -27,6 +27,13 @@ public class Order {
     @ColumnInfo(name = "createAt", defaultValue = "(datetime('now', 'localtime'))")
     private Date createAt;
 
+    public Order(double total_price, OrderType type, OrderStatus status, int user_id) {
+        this.total_price = total_price;
+        this.type = type;
+        this.status = status;
+        this.user_id = user_id;
+    }
+
     public OrderStatus getStatus() {
         return status;
     }
