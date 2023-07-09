@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.phunlh2001.prm392_beverages.adapters.OrderHistoryAdapter;
 import com.phunlh2001.prm392_beverages.data.entities.Order;
+import com.phunlh2001.prm392_beverages.data.entities.enums.OrderStatus;
 import com.phunlh2001.prm392_beverages.data.entities.enums.OrderType;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class OrderHistory_StorePickup_Fragment extends Fragment {
     private void initData(){
         mListOrder = new ArrayList<>();
         for (int i = 0; i < 4; i++){
-            Order order = new Order(135, 2, OrderType.DELIVERY, 1);
+            Order order = new Order(135, OrderType.DELIVERY, OrderStatus.DELIVERED,1);
             mListOrder.add(order);
         }
     }

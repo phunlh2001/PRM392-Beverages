@@ -6,6 +6,7 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import com.phunlh2001.prm392_beverages.data.entities.enums.OrderStatus;
 import com.phunlh2001.prm392_beverages.data.entities.enums.OrderType;
 
 import java.util.Date;
@@ -20,17 +21,29 @@ public class Order {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private double total_price;
-    private int quantity_product;
-    private OrderType ship_type;
+    private OrderType type;
+    private OrderStatus status;
     private int user_id;
     @ColumnInfo(name = "createAt", defaultValue = "(datetime('now', 'localtime'))")
     private Date createAt;
 
-    public Order(double total_price, int quantity_product, OrderType ship_type, int user_id) {
+    public Order(double total_price, OrderType type, OrderStatus status, int user_id) {
         this.total_price = total_price;
-        this.quantity_product = quantity_product;
-        this.ship_type = ship_type;
+        this.type = type;
+        this.status = status;
         this.user_id = user_id;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        if (status == null) {
+            this.status = OrderStatus.PREPARING;
+        } else {
+            this.status = status;
+        }
     }
 
     public Date getCreateAt() {
@@ -65,22 +78,22 @@ public class Order {
         this.total_price = total_price;
     }
 
-    public int getQuantity_product() {
-        return quantity_product;
-    }
-
-    public void setQuantity_product(int quantity_product) {
-        this.quantity_product = quantity_product;
-    }
-
     public OrderType getShip_type() {
-        return ship_type;
+        return type;
     }
 
-    public void setShip_type(OrderType ship_type) {
-        if (ship_type != null)
-            this.ship_type = ship_type;
+    public void setShip_type(OrderType type) {
+        if (type != null)
+            this.type = type;
         else
-            this.ship_type = OrderType.DELIVERY;
+            this.type = OrderType.DELIVERY;
+    }
+
+    public OrderType getType() {
+        return type;
+    }
+
+    public void setType(OrderType type) {
+        this.type = type;
     }
 }
