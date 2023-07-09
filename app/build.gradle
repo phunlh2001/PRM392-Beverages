@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.phunlh2001.prm392_beverages"
-        minSdk 21
+        minSdk 25
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -29,6 +29,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.wear.tiles:tiles-material:1.1.0-alpha04'
     def room_version = "2.5.1"
 
     //noinspection GradleDependency
