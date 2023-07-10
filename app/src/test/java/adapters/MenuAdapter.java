@@ -1,4 +1,4 @@
-package com.phunlh2001.prm392_beverages;
+package adapters;
 
 
 import android.content.Context;
@@ -11,16 +11,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.phunlh2001.prm392_beverages.R;
 import com.phunlh2001.prm392_beverages.data.entities.Product;
 
 import java.util.List;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ProductViewHolder> {
 
     private Context mContext;
     private List<Product> mListProduct;
 
-    public ProductAdapter(Context mContext) {
+    public MenuAdapter(Context mContext) {
         this.mContext = mContext;
     }
 

@@ -170,11 +170,39 @@
 
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1.4"
+        android:orientation="vertical">
 
+        <Button
+            android:id="@+id/minus_icon"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/minus_icon"
+            android:layout_toLeftOf="@id/tv_quantity"/>
+        <TextView
+            android:id="@+id/tv_quantity"
+            android:layout_width="50dp"
+            android:layout_height="45dp"
+            android:background="@drawable/bogoc_stroke"
+            android:layout_centerHorizontal="true"
+            android:text=""/>
+        <Button
+            android:id="@+id/plus_icon"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/plus_icon"
+            android:layout_toEndOf="@+id/tv_quantity" />
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_quantity"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bogoc"
+            android:text="Add to cart"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
