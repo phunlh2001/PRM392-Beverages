@@ -33,7 +33,7 @@ public class OrderHistory extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        List<Category> mList = AppDatabase.getInstance(this).categoryDao().getAll();
+
         //Fragment
         //Test fragment order management
         mTabLayout = findViewById(R.id.tab_layout);

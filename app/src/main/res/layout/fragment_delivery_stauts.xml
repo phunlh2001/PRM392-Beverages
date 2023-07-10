@@ -51,6 +51,7 @@
                     </TextView>
 
                     <TextView
+                        android:id="@+id/order_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="20/04/2020, 04:20"
@@ -112,11 +113,13 @@
                     android:layout_marginBottom="20dp">
 
                     <TextView
+                        android:id="@+id/products_name"
                         android:layout_width="169dp"
                         android:layout_height="wrap_content"
                         android:text="Capuccino (x1), Smoky hamburger (x1)"></TextView>
 
                     <TextView
+                        android:id="@+id/totalPrice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"

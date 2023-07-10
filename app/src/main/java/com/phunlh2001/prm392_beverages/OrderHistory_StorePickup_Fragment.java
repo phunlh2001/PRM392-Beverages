@@ -24,6 +24,11 @@ public class OrderHistory_StorePickup_Fragment extends Fragment {
     RecyclerView rcv;
     OrderHistoryAdapter orderHistoryAdapter;
     List<Order> mListOrder;
+
+    public OrderHistory_StorePickup_Fragment(List<Order> mListOrder) {
+        this.mListOrder = mListOrder;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,8 +39,6 @@ public class OrderHistory_StorePickup_Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        initData();
         rcv = view.findViewById(R.id.rcv);
         rcv.setLayoutManager(new LinearLayoutManager(getContext()));
         rcv.setHasFixedSize(true);
@@ -44,11 +47,4 @@ public class OrderHistory_StorePickup_Fragment extends Fragment {
         orderHistoryAdapter.notifyDataSetChanged();
     }
 
-    private void initData(){
-        mListOrder = new ArrayList<>();
-        for (int i = 0; i < 4; i++){
-            Order order = new Order(135, OrderType.DELIVERY, OrderStatus.DELIVERED,1);
-            mListOrder.add(order);
-        }
-    }
 }
