@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">PRM392_Beverages</string>
+    <string name="recipient_name">Recipient\'s name</string>
+    <string name="recipient_phone">Recipient\'s phone</string>
+    <string name="save_to_address">Save to address</string>
 </resources>
