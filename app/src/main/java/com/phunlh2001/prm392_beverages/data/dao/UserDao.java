@@ -15,14 +15,15 @@ import java.util.List;
 @Dao
 public interface UserDao {
     @Insert
-    void insert(User user);
+    long insertUser(User user);
 
     @Update
     void update(User user);
 
     @Delete
     void delete(User... user);
-
+    @Query("SELECT * FROM users WHERE username=:username")
+    User getUserByUsername(String username);
     @Query("SELECT * FROM users")
     List<User> getAll();
 
@@ -32,4 +33,5 @@ public interface UserDao {
     @Transaction
     @Query("SELECT * FROM users")
     List<UserEmbedded> getAllOrderOfUser();
+
 }

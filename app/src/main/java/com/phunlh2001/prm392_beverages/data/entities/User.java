@@ -1,30 +1,27 @@
 package com.phunlh2001.prm392_beverages.data.entities;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
+        import androidx.room.ColumnInfo;
+        import androidx.room.Entity;
+        import androidx.room.PrimaryKey;
 
-import com.phunlh2001.prm392_beverages.data.entities.enums.RoleAccount;
+        import com.phunlh2001.prm392_beverages.data.entities.enums.RoleAccount;
 
 @Entity(tableName = "Users")
 public class User {
     @PrimaryKey(autoGenerate = true)
     private int id;
+
     @NonNull
     private String email, username, password, full_name;
     @ColumnInfo(name = "avatar", defaultValue = "blank_avatar.jpg")
     private String avatar;
     private RoleAccount role;
 
-    public User(@NonNull String email, @NonNull String username, @NonNull String password, @NonNull String full_name, String avatar, RoleAccount role) {
-        this.email = email;
-        this.username = username;
-        this.password = password;
+    public User(String email, String username, String password) {
+        this.email = this.email;
+        this.username = this.username;
+        this.password = this.password;
         this.full_name = full_name;
         this.avatar = avatar;
         this.role = role;
