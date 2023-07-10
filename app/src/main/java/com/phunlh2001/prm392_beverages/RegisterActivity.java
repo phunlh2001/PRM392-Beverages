@@ -1,75 +1,121 @@
 package com.phunlh2001.prm392_beverages;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.phunlh2001.prm392_beverages.data.AppDatabase;
+import com.phunlh2001.prm392_beverages.data.dao.UserDao;
 import com.phunlh2001.prm392_beverages.data.entities.User;
+import com.phunlh2001.prm392_beverages.data.entities.enums.RoleAccount;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.phunlh2001.prm392_beverages.data.AppDatabase;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText emailEditText, usernameEditText, passwordEditText;
+
+    private EditText emailEditText, usernameEditText, passwordEditText, fullNameEditText;
     private Button registerButton;
 
-    private AppDatabase appDatabase;
+    private UserDao userDao;
+    private ExecutorService executorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
-        // Khởi tạo AppDatabase
-        appDatabase = AppDatabase.getInstance(getApplicationContext());
+        // Initialize database and DAO
+        AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
+        userDao = appDatabase.userDao();
+        executorService = Executors.newSingleThreadExecutor();
 
+        // Initialize views
         emailEditText = findViewById(R.id.editTextTextEmailAddress);
         usernameEditText = findViewById(R.id.editTextTextUsername);
         passwordEditText = findViewById(R.id.editTextTextPassword);
+        fullNameEditText = findViewById(R.id.edit_fullname);
         registerButton = findViewById(R.id.buttonRegister);
 
+        // Set click listener for register button
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = emailEditText.getText().toString();
-                String username = usernameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-
-                User user = new User(email, username, password);
-
-                saveUser(user);
+                registerUser();
             }
         });
     }
 
-    private void saveUser(User user) {
-        String email = user.getEmail();
-        String username = user.getUsername();
-        String password = user.getPassword();
+    private void registerUser() {
+        // Get user input
+        String email = emailEditText.getText().toString().trim();
+        String username = usernameEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+        String fullName = fullNameEditText.getText().toString().trim();
 
-        if (email.isEmpty() || username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(RegisterActivity.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+        // Validate user input
+        if (email.isEmpty() || username.isEmpty() || password.isEmpty() || fullName.isEmpty()) {
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (appDatabase.userDao().getById(user.getId()) != null) {
-            Toast.makeText(RegisterActivity.this, "ID người dùng đã tồn tại", Toast.LENGTH_SHORT).show();
+        // Validate email format
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "Invalid email format. Please enter a valid email address", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        appDatabase.userDao().insertUser(user);
+        // Validate full name (only allow letters)
+        if (!fullName.matches("[a-zA-Z ]+")) {
+            Toast.makeText(this, "Invalid full name. Please enter letters only", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        Toast.makeText(RegisterActivity.this, "Tạo tài khoản thành công", Toast.LENGTH_SHORT).show();
+        // Validate username (only allow letters)
+        if (!username.matches("[a-zA-Z]+")) {
+            Toast.makeText(this, "Invalid username. Please enter letters only", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        // Validate password length
+        if (password.length() > 15) {
+            Toast.makeText(this, "Password must not exceed 15 characters", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Create a new user object
+        User user = new User(email, username, password, fullName, null, RoleAccount.USER);
+
+        // Insert the user into the database using ExecutorService
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                userDao.insert(user);
+            }
+        });
+
+        // Display success message
+        Toast.makeText(this, "User registered successfully", Toast.LENGTH_SHORT).show();
+
+        // Start LoginActivity
         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(intent);
 
+        // Finish the activity
         finish();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Shutdown ExecutorService when the activity is destroyed
+        executorService.shutdown();
+    }
 }
-
-

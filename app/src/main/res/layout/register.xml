@@ -20,11 +20,11 @@
         android:id="@+id/editTextTextEmailAddress"
         android:layout_width="335dp"
         android:layout_height="61dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="212dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="192dp"
         android:ems="10"
+        android:hint="Enter Email "
         android:inputType="text"
-        android:hint="Enter Email Id"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,11 +32,23 @@
         android:id="@+id/editTextTextUsername"
         android:layout_width="332dp"
         android:layout_height="50dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
+        android:hint="Create fullname"
         android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+
+    <EditText
+        android:id="@+id/edit_fullname"
+        android:layout_width="332dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="88dp"
+        android:ems="10"
         android:hint="Create Username"
+        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
 
@@ -44,11 +56,11 @@
         android:id="@+id/editTextTextPassword"
         android:layout_width="334dp"
         android:layout_height="58dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="84dp"
         android:ems="10"
-        android:inputType="text"
         android:hint="Create Password"
+        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextUsername" />
 
