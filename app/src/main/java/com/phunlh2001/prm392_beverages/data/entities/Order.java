@@ -27,11 +27,37 @@ public class Order {
     @ColumnInfo(name = "createAt", defaultValue = "(datetime('now', 'localtime'))")
     private Date createAt;
 
-    public Order(double total_price, OrderType type, OrderStatus status, int user_id) {
+    public Order(double total_price, int user_id) {
         this.total_price = total_price;
-        this.type = type;
-        this.status = status;
         this.user_id = user_id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getTotal_price() {
+        return total_price;
+    }
+
+    public void setTotal_price(double total_price) {
+        this.total_price = total_price;
+    }
+
+    public OrderType getType() {
+        return type;
+    }
+
+    public void setType(OrderType type) {
+        if (type == null) {
+            this.type = OrderType.DELIVERY;
+        } else {
+            this.type = type;
+        }
     }
 
     public OrderStatus getStatus() {
@@ -46,22 +72,6 @@ public class Order {
         }
     }
 
-    public Date getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getUser_id() {
         return user_id;
     }
@@ -70,30 +80,11 @@ public class Order {
         this.user_id = user_id;
     }
 
-    public double getTotal_price() {
-        return total_price;
+    public Date getCreateAt() {
+        return createAt;
     }
 
-    public void setTotal_price(double total_price) {
-        this.total_price = total_price;
-    }
-
-    public OrderType getShip_type() {
-        return type;
-    }
-
-    public void setShip_type(OrderType type) {
-        if (type != null)
-            this.type = type;
-        else
-            this.type = OrderType.DELIVERY;
-    }
-
-    public OrderType getType() {
-        return type;
-    }
-
-    public void setType(OrderType type) {
-        this.type = type;
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
 }

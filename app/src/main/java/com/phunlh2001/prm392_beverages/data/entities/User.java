@@ -21,39 +21,11 @@ public class User {
     @ColumnInfo(name = "createAt", defaultValue = "(datetime('now', 'localtime'))")
     private Date createAt;
 
-    public User(@NonNull String email, @NonNull String password, @NonNull String full_name, @NonNull String address, @NonNull String phone_number, String avatar, RoleAccount role) {
+    public User(@NonNull String email, @NonNull String password, @NonNull String full_name, @NonNull String address, @NonNull String phone_number) {
         this.email = email;
         this.password = password;
         this.full_name = full_name;
         this.address = address;
-        this.phone_number = phone_number;
-        this.avatar = avatar;
-        this.role = role;
-    }
-
-    public Date getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
-    }
-
-    @NonNull
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(@NonNull String address) {
-        this.address = address;
-    }
-
-    @NonNull
-    public String getPhone_number() {
-        return phone_number;
-    }
-
-    public void setPhone_number(@NonNull String phone_number) {
         this.phone_number = phone_number;
     }
 
@@ -63,14 +35,6 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
     }
 
     @NonNull
@@ -91,6 +55,45 @@ public class User {
         this.password = password;
     }
 
+    @NonNull
+    public String getFull_name() {
+        return full_name;
+    }
+
+    public void setFull_name(@NonNull String full_name) {
+        this.full_name = full_name;
+    }
+
+    @NonNull
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(@NonNull String address) {
+        this.address = address;
+    }
+
+    @NonNull
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(@NonNull String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        if (avatar == null) {
+            this.avatar = "blank_avatar.jpg";
+        } else {
+            this.avatar = avatar;
+        }
+    }
+
     public RoleAccount getRole() {
         return role;
     }
@@ -103,12 +106,15 @@ public class User {
         }
     }
 
-    @NonNull
-    public String getFull_name() {
-        return full_name;
+    public Date getCreateAt() {
+        return createAt;
     }
 
-    public void setFull_name(@NonNull String full_name) {
-        this.full_name = full_name;
+    public void setCreateAt(Date createAt) {
+        if (createAt == null) {
+            createAt = new Date();
+        } else {
+            this.createAt = createAt;
+        }
     }
 }
