@@ -1,6 +1,8 @@
 package com.phunlh2001.prm392_beverages;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,75 +14,90 @@ import com.phunlh2001.prm392_beverages.data.AppDatabase;
 import com.phunlh2001.prm392_beverages.data.dao.UserDao;
 import com.phunlh2001.prm392_beverages.data.entities.User;
 import com.phunlh2001.prm392_beverages.data.entities.enums.RoleAccount;
+import com.phunlh2001.prm392_beverages.utils.Hash;
+
+import org.jetbrains.annotations.Contract;
+
+import java.util.Date;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText emailEditText;
-    private EditText usernameEditText;
-    private EditText passwordEditText;
-    private EditText fullNameEditText;
-    private Button signUpButton;
-
+    private EditText edtEmail, edtName, edtPhone, edtPassword, edtAddress, edtConfirmPwd;
+    private Button btnRegister;
     private UserDao userDao;
+
+    private void initialize() {
+        edtEmail = findViewById(R.id.edtEmail);
+        edtName = findViewById(R.id.edtFullName);
+        edtPhone = findViewById(R.id.edtPhone);
+        edtPassword = findViewById(R.id.edtPassword);
+        edtAddress = findViewById(R.id.edtAddress);
+        edtConfirmPwd = findViewById(R.id.edtConfirmPassword);
+
+        btnRegister = findViewById(R.id.btnRegister);
+
+        userDao = AppDatabase.getInstance(this).userDao();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
-
-        // Initialize the UserDao
-        userDao = AppDatabase.getInstance(this).userDao();
-
-        // Find views
-        emailEditText = findViewById(R.id.Email);
-        usernameEditText = findViewById(R.id.username);
-        passwordEditText = findViewById(R.id.Password);
-        fullNameEditText = findViewById(R.id.edit_fullname);
-        signUpButton = findViewById(R.id.buttonRegister);
+        initialize();
 
         // Set click listener for sign up button
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registerUser();
-            }
-        });
+        btnRegister.setOnClickListener(view -> registerUser());
     }
 
     private void registerUser() {
         // Get input values
-        String email = emailEditText.getText().toString().trim();
-        String username = usernameEditText.getText().toString().trim();
-        String password = passwordEditText.getText().toString().trim();
-        String fullName = fullNameEditText.getText().toString().trim();
+        String email = edtEmail.getText().toString().trim();
+        String fullName = edtName.getText().toString().trim();
+        String phone = edtPhone.getText().toString().trim();
+        String password = edtPassword.getText().toString().trim();
+        String address = edtAddress.getText().toString().trim();
+        String confirmPwd = edtConfirmPwd.getText().toString().trim();
 
-        // Validate email
-        if (!isValidEmail(email)) {
-            Toast.makeText(RegisterActivity.this, "Invalid email address", Toast.LENGTH_SHORT).show();
-            return;
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(fullName) || TextUtils.isEmpty(phone) ||
+                TextUtils.isEmpty(password) || TextUtils.isEmpty(address) || TextUtils.isEmpty(confirmPwd)) {
+            Toast.makeText(RegisterActivity.this, "Must be fulfill input", Toast.LENGTH_SHORT).show();
+        } else {
+            try {
+                // Validate email
+                if (!isValidEmail(email)) {
+                    Toast.makeText(RegisterActivity.this, "Invalid email address", Toast.LENGTH_SHORT).show();
+                    throw new Exception("Invalid email address");
+                } else if (!isValidName(fullName)) {
+                    Toast.makeText(RegisterActivity.this, "Invalid name (maximum 20 words)", Toast.LENGTH_SHORT).show();
+                    throw new Exception("Invalid name");
+                } else if (!isValidPhone(phone)) {
+                    Toast.makeText(RegisterActivity.this, "Invalid phone number", Toast.LENGTH_SHORT).show();
+                    throw new Exception("Invalid phone number");
+                } else if (!password.equals(confirmPwd)) {
+                    Toast.makeText(RegisterActivity.this, "Confirm password incorrect", Toast.LENGTH_SHORT).show();
+                    throw new Exception("Confirm password incorrect");
+                } else {
+                    // Create a new User object
+                    User user = new User(email, Hash.Md5(password), fullName, address, phone,
+                            "blank_avatar.jpg", RoleAccount.USER);
+                    user.setCreateAt(new Date());
+                    // Insert the user into the database using UserDao
+                    userDao.insert(user);
+
+                    // Show a success message
+                    Toast.makeText(RegisterActivity.this, "Account created successfully", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
-        // Validate name
-        if (!isValidName(fullName)) {
-            Toast.makeText(RegisterActivity.this, "Invalid name (maximum 20 words)", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // Validate phone number
-
-
-        // Create a new User object
-//        User user = new User(email, username, password, fullName, "blank_avatar.jpg", RoleAccount.USER);
-
-        // Insert the user into the database using UserDao
-//        userDao.insert(user);
-
-        // Show a success message
-        Toast.makeText(RegisterActivity.this, "Account created successfully", Toast.LENGTH_SHORT).show();
     }
 
     private boolean isValidEmail(String email) {
-        return email.contains("@gmail.com");
+        return email.matches("^[a-zA-Z]\\w*@[a-zA-Z]\\w*(\\.[a-zA-Z]\\w*)+$");
     }
 
     private boolean isValidName(String name) {
@@ -88,6 +105,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean isValidPhone(String phone) {
-        return phone.matches("\\d+");
+        return phone.matches("^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$");
     }
 }

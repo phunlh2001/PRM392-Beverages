@@ -1,7 +1,11 @@
 package com.phunlh2001.prm392_beverages;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,79 +32,71 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.phunlh2001.prm392_beverages.data.AppDatabase;
 import com.phunlh2001.prm392_beverages.data.dao.UserDao;
 import com.phunlh2001.prm392_beverages.data.entities.User;
+import com.phunlh2001.prm392_beverages.utils.Hash;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText emailEditText;
-    private EditText passwordEditText;
-    private Button loginButton;
-    private TextView forgotPasswordTextView;
-    private Button createAccountButton;
+    public static final String PREF_NAME = "PrefBeverages";
+    public static final String KEY_LOGIN = "User_Email";
 
+    private EditText edtEmail, edtPwd;
+    private Button btnLogin, btnRegister;
     private UserDao userDao;
+
+    private SharedPreferences pref;
+
+    private void initialize() {
+        edtEmail = findViewById(R.id.edt_email);
+        edtPwd = findViewById(R.id.edt_password);
+        btnLogin = findViewById(R.id.btn_Login);
+        btnRegister = findViewById(R.id.Or_Create);
+
+        userDao = AppDatabase.getInstance(this).userDao();
+
+        pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
-        // Initialize the UserDao
-        userDao = AppDatabase.getInstance(this).userDao();
-
-        // Find views
-        emailEditText = findViewById(R.id.edt_email);
-        passwordEditText = findViewById(R.id.edt_password);
-        loginButton = findViewById(R.id.btn_Login);
-        forgotPasswordTextView = findViewById(R.id.textView5);
-        createAccountButton = findViewById(R.id.Or_Create);
+        initialize();
 
         // Set click listener for login button
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginUser();
-            }
-        });
+        btnLogin.setOnClickListener(view -> loginUser());
 
         // Set click listener for create account button
-        createAccountButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigateToRegister();
-            }
+        btnRegister.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
         });
-    }
-
-    private void navigateToRegister() {
-        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-        startActivity(intent);
     }
 
     private void loginUser() {
         // Get input values
-        String email = emailEditText.getText().toString().trim();
-        String password = passwordEditText.getText().toString().trim();
+        String email = edtEmail.getText().toString().trim();
+        String password = edtPwd.getText().toString().trim();
 
-        // Validate input values (you can add your own validation logic here)
-
-        // Get all users from the database
-        List<User> userList = userDao.getAll();
-
-        // Check if any user matches the given email and password
-        User matchedUser = null;
-        for (User user : userList) {
-            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
-                matchedUser = user;
-                break;
-            }
-        }
-
-        if (matchedUser != null) {
-            // User exists, proceed with login logic
-            // Show a success message or navigate to the next screen
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+            Toast.makeText(this, "Must be fulfill input", Toast.LENGTH_SHORT).show();
         } else {
-            // User doesn't exist or invalid credentials
-            Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+            User user = userDao.getUserByEmail(email);
+            if (user == null || !user.getPassword().equals(Hash.Md5(password))) {
+                Toast.makeText(this, "Email or password incorrect", Toast.LENGTH_SHORT).show();
+            } else {
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString(KEY_LOGIN, email);
+                boolean isLogin = editor.commit();
+
+                if (isLogin) {
+                    Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+                }
+            }
         }
     }
 }
