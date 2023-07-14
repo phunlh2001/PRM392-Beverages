@@ -33,4 +33,7 @@ public interface UserDao {
     @Transaction
     @Query("SELECT * FROM users")
     List<UserEmbedded> getAllOrderOfUser();
+
+    @Query("SELECT * FROM users WHERE email=:email")
+    User getUserByEmail(String email);
 }
