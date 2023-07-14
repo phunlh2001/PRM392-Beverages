@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/RegisterActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="152dp"
-        android:layout_height="105dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="60dp"
-        android:text="Create Account :)"
+        android:layout_width="245dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Create Account Beverages :)"
         android:textSize="32sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,10 +22,9 @@
         android:id="@+id/Email"
         android:layout_width="335dp"
         android:layout_height="61dp"
-        android:layout_marginTop="192dp"
-        android:ems="10"
         android:hint=" Email "
         android:inputType="text"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,29 +43,16 @@
         app:layout_constraintTop_toBottomOf="@+id/Email" />
 
     <EditText
-        android:id="@+id/username"
-        android:layout_width="332dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="username"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_fullname" />
-
-    <EditText
         android:id="@+id/Password"
         android:layout_width="334dp"
         android:layout_height="58dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Create Password"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="381dp" />
 
     <EditText
         android:id="@+id/Phone"
@@ -104,5 +91,5 @@
         android:text="Sign Up"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Password" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
 

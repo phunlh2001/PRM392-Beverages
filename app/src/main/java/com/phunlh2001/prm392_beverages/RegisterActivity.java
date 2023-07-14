@@ -70,10 +70,10 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         // Create a new User object
-        User user = new User(email, username, password, fullName, "blank_avatar.jpg", RoleAccount.USER);
+//        User user = new User(email, username, password, fullName, "blank_avatar.jpg", RoleAccount.USER);
 
         // Insert the user into the database using UserDao
-        userDao.insert(user);
+//        userDao.insert(user);
 
         // Show a success message
         Toast.makeText(RegisterActivity.this, "Account created successfully", Toast.LENGTH_SHORT).show();
