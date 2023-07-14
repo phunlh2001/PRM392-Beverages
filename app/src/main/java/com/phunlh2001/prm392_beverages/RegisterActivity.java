@@ -78,9 +78,10 @@ public class RegisterActivity extends AppCompatActivity {
                     throw new Exception("Confirm password incorrect");
                 } else {
                     // Create a new User object
-                    User user = new User(email, Hash.Md5(password), fullName, address, phone,
-                            "blank_avatar.jpg", RoleAccount.USER);
-                    user.setCreateAt(new Date());
+                    User user = new User(email, Hash.Md5(password), fullName, address, phone);
+                    user.setAvatar(null);
+                    user.setRole(null);
+                    user.setCreateAt(null);
                     // Insert the user into the database using UserDao
                     userDao.insert(user);
 
