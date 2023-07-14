@@ -1,93 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/RegisterActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_margin="12dp"
+    android:orientation="vertical"
+    android:gravity="center">
 
     <TextView
-        android:id="@+id/textView8"
         android:layout_width="245dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Create Account Beverages :)"
         android:textSize="32sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/Email"
-        android:layout_width="335dp"
-        android:layout_height="61dp"
-        android:hint=" Email "
-        android:inputType="text"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/edit_fullname"
+        android:id="@+id/edtFullName"
         android:layout_width="332dp"
         android:layout_height="50dp"
         android:layout_marginTop="12dp"
-        android:ems="10"
-        android:hint="Full name"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Email" />
+        android:hint="Full name" />
 
     <EditText
-        android:id="@+id/Password"
-        android:layout_width="334dp"
-        android:layout_height="58dp"
-        android:ems="10"
-        android:hint="Create Password"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="381dp" />
+        android:id="@+id/edtEmail"
+        android:layout_width="332dp"
+        android:layout_height="50dp"
+        android:hint=" Email "
+        android:inputType="textEmailAddress" />
 
     <EditText
-        android:id="@+id/Phone"
+        android:id="@+id/edtPassword"
         android:layout_width="334dp"
         android:layout_height="58dp"
-        android:layout_marginBottom="92dp"
-        android:ems="10"
-        android:hint="phone"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/buttonRegister"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        android:hint="Password"
+        android:inputType="textPassword" />
 
     <EditText
-        android:id="@+id/Address"
+        android:id="@+id/edtConfirmPassword"
         android:layout_width="334dp"
         android:layout_height="58dp"
-        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"/>
+
+    <EditText
+        android:id="@+id/edtPhone"
+        android:layout_width="334dp"
+        android:layout_height="58dp"
+        android:hint="Phone number"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/edtAddress"
+        android:layout_width="334dp"
+        android:layout_height="58dp"
         android:hint="Address"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/buttonRegister"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.519"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Phone"
-        tools:ignore="MissingConstraints" />
+        android:inputType="text" />
 
     <Button
-        android:id="@+id/buttonRegister"
+        android:id="@+id/btnRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="160dp"
         android:text="Sign Up"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Password" />
