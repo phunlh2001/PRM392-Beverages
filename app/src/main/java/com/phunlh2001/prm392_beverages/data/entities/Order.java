@@ -30,6 +30,10 @@ public class Order {
     public Order(double total_price, int user_id) {
         this.total_price = total_price;
         this.user_id = user_id;
+
+        this.type = OrderType.DELIVERY;
+        this.status = OrderStatus.PREPARING;
+        this.createAt = new Date();
     }
 
     public int getId() {
@@ -53,11 +57,7 @@ public class Order {
     }
 
     public void setType(OrderType type) {
-        if (type == null) {
-            this.type = OrderType.DELIVERY;
-        } else {
-            this.type = type;
-        }
+        this.type = type;
     }
 
     public OrderStatus getStatus() {
@@ -65,11 +65,7 @@ public class Order {
     }
 
     public void setStatus(OrderStatus status) {
-        if (status == null) {
-            this.status = OrderStatus.PREPARING;
-        } else {
-            this.status = status;
-        }
+        this.status = status;
     }
 
     public int getUser_id() {

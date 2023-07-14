@@ -27,6 +27,10 @@ public class User {
         this.full_name = full_name;
         this.address = address;
         this.phone_number = phone_number;
+
+        this.avatar = "blank_avatar.jpg";
+        this.role = RoleAccount.USER;
+        this.createAt = new Date();
     }
 
     public int getId() {
@@ -87,11 +91,7 @@ public class User {
     }
 
     public void setAvatar(String avatar) {
-        if (avatar == null) {
-            this.avatar = "blank_avatar.jpg";
-        } else {
-            this.avatar = avatar;
-        }
+        this.avatar = avatar;
     }
 
     public RoleAccount getRole() {
@@ -99,11 +99,7 @@ public class User {
     }
 
     public void setRole(RoleAccount role) {
-        if (role == null) {
-            this.role = RoleAccount.USER;
-        } else {
-            this.role = role;
-        }
+        this.role = role;
     }
 
     public Date getCreateAt() {
@@ -111,10 +107,6 @@ public class User {
     }
 
     public void setCreateAt(Date createAt) {
-        if (createAt == null) {
-            createAt = new Date();
-        } else {
-            this.createAt = createAt;
-        }
+        this.createAt = createAt;
     }
 }
