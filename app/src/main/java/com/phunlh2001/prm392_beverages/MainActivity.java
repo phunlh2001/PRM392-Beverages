@@ -5,32 +5,27 @@ import static com.phunlh2001.prm392_beverages.LoginActivity.PREF_NAME;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.TextView;
-
-import com.phunlh2001.prm392_beverages.data.AppDatabase;
-import com.phunlh2001.prm392_beverages.data.dao.ProductDao;
 
 public class MainActivity extends AppCompatActivity {
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         SharedPreferences pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        String username = pref.getString(KEY_LOGIN, "");
-        if (username.isEmpty()) {
+        String email = pref.getString(KEY_LOGIN, "");
+        if (email.isEmpty()) {
             Intent intent = new Intent(MainActivity.this, GetStartActivity.class);
             startActivity(intent);
         } else {
-            TextView tvMain = findViewById(R.id.tvMain);
-            ProductDao productDao = AppDatabase.getInstance(this).productDao();
-            // test
-            tvMain.setText(productDao.getById(2).getTitle());
+            // [TODO] Navigate to your layout to testing here
         }
     }
 }
