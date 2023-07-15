@@ -47,6 +47,15 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".LoginActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".GetStartActivity"
+            android:exported="false"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

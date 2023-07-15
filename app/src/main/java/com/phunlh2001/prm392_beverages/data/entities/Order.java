@@ -27,31 +27,13 @@ public class Order {
     @ColumnInfo(name = "createAt", defaultValue = "(datetime('now', 'localtime'))")
     private Date createAt;
 
-    public Order(double total_price, OrderType type, OrderStatus status, int user_id) {
+    public Order(double total_price, int user_id) {
         this.total_price = total_price;
-        this.type = type;
-        this.status = status;
         this.user_id = user_id;
-    }
 
-    public OrderStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(OrderStatus status) {
-        if (status == null) {
-            this.status = OrderStatus.PREPARING;
-        } else {
-            this.status = status;
-        }
-    }
-
-    public Date getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+        this.type = OrderType.DELIVERY;
+        this.status = OrderStatus.PREPARING;
+        this.createAt = new Date();
     }
 
     public int getId() {
@@ -62,14 +44,6 @@ public class Order {
         this.id = id;
     }
 
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
     public double getTotal_price() {
         return total_price;
     }
@@ -78,22 +52,35 @@ public class Order {
         this.total_price = total_price;
     }
 
-    public OrderType getShip_type() {
-        return type;
-    }
-
-    public void setShip_type(OrderType type) {
-        if (type != null)
-            this.type = type;
-        else
-            this.type = OrderType.DELIVERY;
-    }
-
     public OrderType getType() {
         return type;
     }
 
     public void setType(OrderType type) {
         this.type = type;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
 }
