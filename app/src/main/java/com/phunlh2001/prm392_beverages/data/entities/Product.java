@@ -7,6 +7,8 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "Products",
         foreignKeys = @ForeignKey(
                 entity = Category.class,
@@ -14,7 +16,7 @@ import androidx.room.PrimaryKey;
                 childColumns = "category_id",
                 onDelete = ForeignKey.CASCADE),
         indices = @Index(value = "category_id"))
-public class Product {
+public class Product implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @NonNull
