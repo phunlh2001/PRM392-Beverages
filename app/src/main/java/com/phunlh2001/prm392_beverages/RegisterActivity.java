@@ -58,39 +58,33 @@ public class RegisterActivity extends AppCompatActivity {
         String address = edtAddress.getText().toString().trim();
         String confirmPwd = edtConfirmPwd.getText().toString().trim();
 
-        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(fullName) || TextUtils.isEmpty(phone) ||
-                TextUtils.isEmpty(password) || TextUtils.isEmpty(address) || TextUtils.isEmpty(confirmPwd)) {
-            Toast.makeText(RegisterActivity.this, "Must be fulfill input", Toast.LENGTH_SHORT).show();
-        } else {
-            try {
-                // Validate email
-                if (!isValidEmail(email)) {
-                    Toast.makeText(RegisterActivity.this, "Invalid email address", Toast.LENGTH_SHORT).show();
-                    throw new Exception("Invalid email address");
-                } else if (!isValidName(fullName)) {
-                    Toast.makeText(RegisterActivity.this, "Invalid name (maximum 20 words)", Toast.LENGTH_SHORT).show();
-                    throw new Exception("Invalid name");
-                } else if (!isValidPhone(phone)) {
-                    Toast.makeText(RegisterActivity.this, "Invalid phone number", Toast.LENGTH_SHORT).show();
-                    throw new Exception("Invalid phone number");
-                } else if (!password.equals(confirmPwd)) {
-                    Toast.makeText(RegisterActivity.this, "Confirm password incorrect", Toast.LENGTH_SHORT).show();
-                    throw new Exception("Confirm password incorrect");
-                } else {
-                    // Create a new User object
-                    User user = new User(email, Hash.Md5(password), fullName, address, phone);
-                    // Insert the user into the database using UserDao
-                    userDao.insert(user);
+        try {
+            if (TextUtils.isEmpty(email) || TextUtils.isEmpty(fullName) || TextUtils.isEmpty(phone) ||
+                    TextUtils.isEmpty(password) || TextUtils.isEmpty(address) || TextUtils.isEmpty(confirmPwd)) {
+                throw new Exception("Must be fulfill input");
+            } else if (!isValidEmail(email)) {
+                throw new Exception("Invalid email address");
+            } else if (!isValidName(fullName)) {
+                throw new Exception("Invalid name (maximum 20 words)");
+            } else if (!isValidPhone(phone)) {
+                throw new Exception("Invalid phone number");
+            } else if (!password.equals(confirmPwd)) {
+                throw new Exception("Confirm password incorrect");
+            } else {
+                // Create a new User object
+                User user = new User(email, Hash.Md5(password), fullName, address, phone);
+                // Insert the user into the database using UserDao
+                userDao.insert(user);
 
-                    // Show a success message
-                    Toast.makeText(RegisterActivity.this, "Account created successfully", Toast.LENGTH_SHORT).show();
+                // Show a success message
+                Toast.makeText(RegisterActivity.this, "Account created successfully", Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
     }
 
