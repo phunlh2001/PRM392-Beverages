@@ -7,10 +7,11 @@ import androidx.room.PrimaryKey;
 
 import com.phunlh2001.prm392_beverages.data.entities.enums.RoleAccount;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity(tableName = "Users")
-public class User {
+public class User implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @NonNull

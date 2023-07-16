@@ -1,87 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="start"
+    android:padding="12dp"
+    style="@style/border_radius"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="12dp">
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:paddingEnd="4dp"
+        android:src="@drawable/ic_map_pointer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
-        android:gravity="center"
-        android:padding="12dp"
-        style="@style/border_radius"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:paddingEnd="8dp"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:paddingEnd="4dp"
-            android:src="@drawable/ic_map_pointer"
+        <TextView
+            android:id="@+id/addressSelector_address"
+            android:text="128 Nguyen Dinh Chieu,D.3,HCM..."
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
-        <LinearLayout
-            android:paddingEnd="8dp"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/addressSelector_address"
-                android:text="128 Nguyen Dinh Chieu,D.3,HCM..."
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/addressSelector_name"
-                    android:text="Nick"
-                    android:textColor="@color/silver"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:paddingHorizontal="8dp"
-                    android:text="•"
-                    android:textColor="@color/silver"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:id="@+id/addressSelector_numberPhone"
-                    android:text="0896969696"
-                    android:textColor="@color/silver"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/btn_edit_user_address"
-                android:src="@drawable/ic_pen"
+
+            <TextView
+                android:id="@+id/addressSelector_name"
+                android:text="Nick"
+                android:textColor="@color/silver"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-            <ImageView
-                android:id="@+id/btn_delete_user_address"
-                android:src="@drawable/ic_address_bin"
+            <TextView
+                android:paddingHorizontal="8dp"
+                android:text="•"
+                android:textColor="@color/silver"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"/>
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/addressSelector_numberPhone"
+                android:text="0896969696"
+                android:textColor="@color/silver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/btn_edit_user_address"
+            android:src="@drawable/ic_pen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/btn_delete_user_address"
+            android:src="@drawable/ic_address_bin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"/>
     </LinearLayout>
 
 </LinearLayout>

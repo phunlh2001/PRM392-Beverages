@@ -37,19 +37,24 @@ public class NewAddressActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_address);
         init();
 
-//        user = (User) getIntent().getExtras().get("user");
-//        if (user != null) {
-//            edtAddress.setText(user.getAddress());
-//            edtName.setText(user.getFull_name());
-//            edtPhone.setText(user.getPhone_number());
-//        }
+        try {
+            user = (User) getIntent().getExtras().get("user");
+            if (user != null) {
+                edtAddress.setText(user.getAddress());
+                edtName.setText(user.getFull_name());
+                edtPhone.setText(user.getPhone_number());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         btnSave.setOnClickListener(v -> handleClickSave());
     }
 
     private void handleClickSave() {
         getData();
-        if (TextUtils.isEmpty(strName) || TextUtils.isEmpty(strAddress) || TextUtils.isEmpty(strPhone)) {
+        User _userExist = userDao.getById(user.getId());
+        if (_userExist == null) {
             insertAddress();
         } else {
             updateAddress();
@@ -57,23 +62,38 @@ public class NewAddressActivity extends AppCompatActivity {
     }
 
     private void insertAddress() {
-
-        userDao.insert(user);
-        Toast.makeText(this, "Update address successfully", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(NewAddressActivity.this, AddressSelectorActivity.class);
-        startActivity(intent);
-        finish();
+        try {
+            userDao.insert(user);
+            Toast.makeText(this, "Insert address successfully", Toast.LENGTH_LONG).show();
+            navigateToHome();
+            finish();
+        } catch (Exception e) {
+            Toast.makeText(this, "Insert address failed", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
 
     private void updateAddress() {
-        getData();
-
+        try {
+            userDao.update(user);
+            Toast.makeText(this, "Update address successfully", Toast.LENGTH_LONG).show();
+            navigateToHome();
+            finish();
+        } catch (Exception e) {
+            Toast.makeText(this, "Update address failed", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
 
     private void getData() {
         strName = edtName.getText().toString().trim();
         strAddress = edtAddress.getText().toString().trim();
         strPhone = edtPhone.getText().toString().trim();
+    }
+
+    private void navigateToHome() {
+        Intent intent = new Intent(NewAddressActivity.this, AddressSelectorActivity.class);
+        startActivity(intent);
     }
 
 //    private <T> void getListToSpinner(ArrayAdapter<T> adapter, @NonNull Spinner spinner, T[] list) {

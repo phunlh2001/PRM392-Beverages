@@ -75,7 +75,7 @@ public class AddressSelectorActivity extends AppCompatActivity {
         } else {
             Intent intent = new Intent(AddressSelectorActivity.this, NewAddressActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putSerializable("user", (Serializable) _user);
+            bundle.putSerializable("user", _user);
             intent.putExtras(bundle);
             startActivity(intent);
             finish();
@@ -83,16 +83,21 @@ public class AddressSelectorActivity extends AppCompatActivity {
     }
 
     private void handleClickDelete(User user) {
-        new AlertDialog.Builder(this)
-                .setTitle("Confirmation")
-                .setMessage("Do you want to remove this address?")
-                .setPositiveButton("Yes", (dialog, which) -> {
-                    // delete here
-                    userDao.delete(user);
-                    Toast.makeText(this, "Delete address successfully", Toast.LENGTH_SHORT).show();
-                    LoadData();
-                })
-                .setNegativeButton("No", null)
-                .show();
+        User _user = userDao.getById(user.getId());
+        if (_user == null) {
+            Toast.makeText(this, "Cannot get this address", Toast.LENGTH_SHORT).show();
+        } else {
+            new AlertDialog.Builder(this)
+                    .setTitle("Confirmation")
+                    .setMessage("Do you want to remove this address?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        // delete here
+                        userDao.delete(_user);
+                        Toast.makeText(this, "Delete address successfully", Toast.LENGTH_SHORT).show();
+                        LoadData();
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        }
     }
 }
