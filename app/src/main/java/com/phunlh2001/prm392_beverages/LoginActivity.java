@@ -36,7 +36,7 @@ import com.phunlh2001.prm392_beverages.utils.Hash;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static final String PREF_NAME = "PrefBeverages";
+    public static final String PREF_LOGIN = "PrefBeveragesLogin";
     public static final String KEY_LOGIN = "User_Email";
 
     private EditText edtEmail, edtPwd;
@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
         userDao = AppDatabase.getInstance(this).userDao();
 
-        pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        pref = getSharedPreferences(PREF_LOGIN, Context.MODE_PRIVATE);
     }
 
     @Override
