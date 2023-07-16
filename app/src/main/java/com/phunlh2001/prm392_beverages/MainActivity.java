@@ -1,7 +1,7 @@
 package com.phunlh2001.prm392_beverages;
 
 import static com.phunlh2001.prm392_beverages.LoginActivity.KEY_LOGIN;
-import static com.phunlh2001.prm392_beverages.LoginActivity.PREF_NAME;
+import static com.phunlh2001.prm392_beverages.LoginActivity.PREF_LOGIN;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences(PREF_LOGIN, Context.MODE_PRIVATE);
         String email = pref.getString(KEY_LOGIN, "");
         if (email.isEmpty()) {
             Intent intent = new Intent(MainActivity.this, GetStartActivity.class);
