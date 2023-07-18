@@ -1,5 +1,7 @@
 package com.phunlh2001.prm392_beverages.adapters;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +12,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.phunlh2001.prm392_beverages.R;
-import com.phunlh2001.prm392_beverages.data.entities.Category;
+import com.phunlh2001.prm392_beverages.data.entities.Product;
+import com.phunlh2001.prm392_beverages.viewmodel.CategoryViewModel;
 
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
-    List<Category> categoryList;
+    List<CategoryViewModel> categoryList;
+    private final Context context;
+
+    public CategoryAdapter(Context context) {
+        this.context = context;
+    }
+
+    public void setData(List<CategoryViewModel> list) {
+        categoryList = list;
+    }
 
     @NonNull
     @Override
@@ -26,11 +38,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-        Category category = categoryList.get(position);
+        CategoryViewModel category = categoryList.get(position);
         if (category == null) return;
 
-//        holder.imgCategory.setImageResource();
-        holder.tvCategoryName.setText("");
+        @SuppressLint("DiscouragedApi")
+        int resId = context.getResources()
+                .getIdentifier(category.getImage(), "drawable", context.getPackageName());
+
+        holder.imgCategory.setImageResource(resId);
+        holder.tvCategoryName.setText(category.getName());
     }
 
     @Override
@@ -39,11 +55,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
     public static class CategoryViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imgCategory;
-        private TextView tvCategoryName;
+        ImageView imgCategory;
+        TextView tvCategoryName;
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            imgCategory = itemView.findViewById(R.id.imgCategory);
+            tvCategoryName = itemView.findViewById(R.id.tvCategoryName);
         }
     }
 }

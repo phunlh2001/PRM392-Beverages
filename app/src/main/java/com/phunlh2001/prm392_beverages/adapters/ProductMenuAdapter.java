@@ -16,11 +16,11 @@ import com.phunlh2001.prm392_beverages.data.entities.Product;
 
 import java.util.List;
 
-public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
+public class ProductMenuAdapter extends RecyclerView.Adapter<ProductMenuAdapter.MenuViewHolder> {
     private List<Product> _products;
     private final Context context;
 
-    public MenuAdapter(Context context) {
+    public ProductMenuAdapter(Context context) {
         this.context = context;
     }
 
@@ -31,7 +31,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     @NonNull
     @Override
     public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.menu_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_item, parent, false);
         return new MenuViewHolder(view);
     }
 
@@ -52,8 +52,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
     @Override
     public int getItemCount() {
-        if (_products != null) return _products.size();
-        return 0;
+        return _products != null ? _products.size() : 0;
     }
 
     public static class MenuViewHolder extends RecyclerView.ViewHolder {
