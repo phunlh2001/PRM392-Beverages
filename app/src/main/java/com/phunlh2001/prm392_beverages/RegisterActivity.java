@@ -61,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
         try {
             if (TextUtils.isEmpty(email) || TextUtils.isEmpty(fullName) || TextUtils.isEmpty(phone) ||
                     TextUtils.isEmpty(password) || TextUtils.isEmpty(address) || TextUtils.isEmpty(confirmPwd)) {
-                throw new Exception("Must be fulfill input");
+                throw new Exception("Must fill in all blank");
             } else if (!isValidEmail(email)) {
                 throw new Exception("Invalid email address");
             } else if (!isValidName(fullName)) {
@@ -70,7 +70,9 @@ public class RegisterActivity extends AppCompatActivity {
                 throw new Exception("Invalid phone number");
             } else if (!password.equals(confirmPwd)) {
                 throw new Exception("Confirm password incorrect");
-            } else {
+            } else if (userDao.getUserByEmail(email) != null) {
+                throw new Exception("Email already exists");
+            }else {
                 // Create a new User object
                 User user = new User(email, Hash.Md5(password), fullName, address, phone);
                 // Insert the user into the database using UserDao
