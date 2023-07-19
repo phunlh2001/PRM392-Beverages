@@ -2,8 +2,6 @@ package com.phunlh2001.prm392_beverages.data.entities;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
@@ -32,14 +30,23 @@ public class Product {
     private String desc;
     private double price;
     private int category_id;
+    private int quantity;
+    private double totalItemPrice;
 
-    public Product(@NonNull String thumbnail, @NonNull String title, @NonNull String desc, double price, int category_id) {
+    public Product(int id, @NonNull String thumbnail, @NonNull String title, @NonNull String desc, double price, int category_id, int quantity, double totalItemPrice) {
+        this.id = id;
         this.thumbnail = thumbnail;
         this.title = title;
         this.desc = desc;
         this.price = price;
         this.category_id = category_id;
+        this.quantity = quantity;
+        this.totalItemPrice = totalItemPrice;
     }
+
+    public Product() {
+    }
+
     public int getId() {
         return id;
     }
@@ -89,5 +96,21 @@ public class Product {
 
     public void setCategory_id(int category_id) {
         this.category_id = category_id;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public double getTotalItemPrice() {
+        return totalItemPrice;
+    }
+
+    public void setTotalItemPrice(double totalItemPrice) {
+        this.totalItemPrice = totalItemPrice;
     }
 }

@@ -7,14 +7,14 @@ import androidx.room.Index;
 @Entity(tableName = "OrderDetails",
         primaryKeys = {"product_id", "order_id"},
         foreignKeys = {
-            @ForeignKey(entity = Product.class,
-                    parentColumns = "id",
-                    childColumns = "product_id",
-                    onDelete = ForeignKey.CASCADE),
-            @ForeignKey(entity = Order.class,
-                    parentColumns = "id",
-                    childColumns = "order_id",
-                    onDelete = ForeignKey.CASCADE)
+                @ForeignKey(entity = Product.class,
+                        parentColumns = "id",
+                        childColumns = "product_id",
+                        onDelete = ForeignKey.CASCADE),
+                @ForeignKey(entity = Order.class,
+                        parentColumns = "id",
+                        childColumns = "order_id",
+                        onDelete = ForeignKey.CASCADE)
         },
         indices = {
                 @Index(value = "product_id"),
@@ -23,38 +23,4 @@ import androidx.room.Index;
 public class OrderDetail {
     public int product_id;
     public int order_id;
-    public int quantity;
-    private double totalItemPrice;
-
-    public int getProduct_id() {
-        return product_id;
-    }
-
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
-    }
-
-    public int getOrder_id() {
-        return order_id;
-    }
-
-    public void setOrder_id(int order_id) {
-        this.order_id = order_id;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public double getTotalItemPrice() {
-        return totalItemPrice;
-    }
-
-    public void setTotalItemPrice(double totalItemPrice) {
-        this.totalItemPrice = totalItemPrice;
-    }
 }

@@ -21,16 +21,14 @@ public interface CartDao {
     @Delete
     void deleteCartItem(Product product);
 
-    @Query("UPDATE OrderDetails SET quantity=:quantity " +
-            "WHERE (SELECT Products.id=:id FROM Products " +
-            "WHERE Products.id = OrderDetails.product_id)")
+    @Query("UPDATE Products SET quantity=:quantity " +
+            "WHERE id=:id")
     void updateQuantity(int id, int quantity);
 
-    @Query("UPDATE OrderDetails SET totalItemPrice=:totalItemPrice " +
-            "WHERE (SELECT Products.id=:id FROM Products " +
-            "WHERE Products.id = OrderDetails.product_id)")
+    @Query("UPDATE Products SET totalItemPrice=:totalItemPrice " +
+            "WHERE id=:id")
     void updatePrice(int id, double totalItemPrice);
 
-    @Query("DELETE FROM OrderDetails")
+    @Query("DELETE FROM Products")
     void deleteAllItems();
 }
