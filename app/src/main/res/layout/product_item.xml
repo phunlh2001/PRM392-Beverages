@@ -10,24 +10,24 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/img_product"
+            android:id="@+id/img_item_menu"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:src="@drawable/pure_black_new"/>
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/menu_item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:text="Product name"
             android:textColor="@color/black"
-            android:layout_toEndOf="@+id/img_product"
+            android:layout_toEndOf="@+id/img_item_menu"
 
             android:layout_marginStart="20dp"/>
 
         <TextView
-            android:id="@+id/tv_price"
+            android:id="@+id/menu_item_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -35,7 +35,7 @@
 
             android:layout_marginStart="20dp"
 
-            android:layout_toEndOf="@+id/img_product"
+            android:layout_toEndOf="@+id/img_item_menu"
             android:text="Price"
             android:textColor="@color/black"
             android:textStyle="bold"

@@ -44,33 +44,33 @@
         android:background="@drawable/bogoc">
 
         <ImageView
-            android:id="@+id/img_product"
+            android:id="@+id/img_item_menu"
             android:layout_width="match_parent"
             android:layout_height="200dp"
 
             android:src="@drawable/capuccino" />
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/menu_item_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Name"
             android:textSize="20dp"
-            android:layout_alignBottom="@+id/img_product"/>
+            android:layout_alignBottom="@+id/img_item_menu"/>
 
         <TextView
-            android:id="@+id/tv_price"
+            android:id="@+id/menu_item_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Price"
             android:textStyle="bold"
-            android:layout_below="@+id/tv_name"/>
+            android:layout_below="@+id/menu_item_title"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Description"
-            android:layout_below="@+id/tv_price"/>
+            android:layout_below="@+id/menu_item_price"/>
     </RelativeLayout>
 
 
