@@ -16,7 +16,6 @@ import com.phunlh2001.prm392_beverages.data.dao.UserDao;
 import com.phunlh2001.prm392_beverages.data.entities.User;
 import com.phunlh2001.prm392_beverages.helper.ISavedPlace;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,7 +77,6 @@ public class AddressSelectorActivity extends AppCompatActivity {
             bundle.putSerializable("user", _user);
             intent.putExtras(bundle);
             startActivity(intent);
-            finish();
         }
     }
 

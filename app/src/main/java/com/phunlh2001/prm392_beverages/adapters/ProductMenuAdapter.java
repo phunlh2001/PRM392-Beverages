@@ -52,15 +52,15 @@ public class ProductMenuAdapter extends RecyclerView.Adapter<ProductMenuAdapter.
         holder.price.setText("" + prod.getPrice());
         
         holder.btnDetail.setOnClickListener(view -> {
-            Toast.makeText(holder.itemView.getContext(), "Goto Detail", Toast.LENGTH_SHORT).show();
-//            Intent intent = new Intent(holder.itemView.getContext(), ShowDetailActivity.class);
+            Toast.makeText(context, "Goto Detail", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(context(), ShowDetailActivity.class);
 //            intent.putExtras("product", prod.get(position));
-//            holder.itemView.getContext().startActivity(intent);
+//            context.startActivity(intent);
         });
         
         holder.btnAddToCart.setOnClickListener(view -> {
             // cart.insert(prod.get(position));
-            Toast.makeText(holder.itemView.getContext(), "Add to cart successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Add to cart successfully", Toast.LENGTH_SHORT).show();
         });
     }
 
