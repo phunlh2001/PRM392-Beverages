@@ -23,7 +23,7 @@ public class SearchProductActivity extends AppCompatActivity {
     private ProductDao productDao;
 
     private void init() {
-        // anh xa
+        // anh xa view
         rcvProduct = findViewById(R.id.rcv_product);
 
         // khoi tao adapter
@@ -42,15 +42,11 @@ public class SearchProductActivity extends AppCompatActivity {
 
         init();
         viewProduct();
-
-
-
-
     }
 
     private void viewProduct() {
         // tao rcv
-        GridLayoutManager gridLayoutManager =new GridLayoutManager(this, 3);
+        GridLayoutManager gridLayoutManager =new GridLayoutManager(this, 1);
         rcvProduct.setLayoutManager(gridLayoutManager);
 
         // set data
