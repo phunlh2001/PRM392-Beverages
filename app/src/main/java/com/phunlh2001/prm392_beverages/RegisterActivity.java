@@ -61,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
         try {
             if (TextUtils.isEmpty(email) || TextUtils.isEmpty(fullName) || TextUtils.isEmpty(phone) ||
                     TextUtils.isEmpty(password) || TextUtils.isEmpty(address) || TextUtils.isEmpty(confirmPwd)) {
-                throw new Exception("Must fill in all blank");
+                throw new Exception("Must be fill in all blank");
             } else if (!isValidEmail(email)) {
                 throw new Exception("Invalid email address");
             } else if (!isValidName(fullName)) {
