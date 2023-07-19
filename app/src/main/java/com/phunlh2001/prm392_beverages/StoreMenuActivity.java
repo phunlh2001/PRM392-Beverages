@@ -59,7 +59,7 @@ public class StoreMenuActivity extends AppCompatActivity {
     }
 
     private void recyclerViewProduct() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 4);
         rcvMenu.setLayoutManager(gridLayoutManager);
 
         List<Product> _list = productDao.getAll();
