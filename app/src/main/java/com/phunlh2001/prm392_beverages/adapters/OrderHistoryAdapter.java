@@ -5,7 +5,10 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,10 +23,15 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     Context context;
     List<Order> mListOrder;
     String type;
-    public OrderHistoryAdapter(Context context, List<Order> mListOrder, String type) {
+    public IClickItem iClickItem;
+    public interface IClickItem{
+        void onBindItem(Order order);
+    }
+    public OrderHistoryAdapter(Context context, List<Order> mListOrder, String type, IClickItem iClickItem) {
         this.context = context;
         this.mListOrder = mListOrder;
         this.type = type;
+        this.iClickItem = iClickItem;
     }
 
     @NonNull
@@ -48,6 +56,10 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             holder.status.setTextColor(Color.parseColor("#FF424E"));
             holder.status.setBackgroundResource(R.drawable.custom_text_status_failed);
         }
+        holder.linearLayout.setOnClickListener(v -> {
+            iClickItem.onBindItem(order);
+        });
+
     }
 
     @Override
@@ -61,11 +73,14 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     public class OrderHistoryViewHolder extends RecyclerView.ViewHolder{
         TextView totalPrice;
         TextView status;
+        LinearLayout linearLayout;
+
         public OrderHistoryViewHolder(@NonNull View itemView) {
             super(itemView);
 
             totalPrice = itemView.findViewById(R.id.totalPrice);
             status = itemView.findViewById(R.id.status_order);
+            linearLayout = itemView.findViewById(R.id.order_detail);
         }
     }
 }

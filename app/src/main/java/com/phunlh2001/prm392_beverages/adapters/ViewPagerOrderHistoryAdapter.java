@@ -31,13 +31,14 @@ public class ViewPagerOrderHistoryAdapter extends FragmentStateAdapter {
         switch (position){
             case 0:
                 for(Order o: mListOrder){
-                    if(o.getShip_type().equals(OrderType.STORE_PICKUP)){
+                    if(o.getShip_type().equals(OrderType.STORE_PICKUP) && o.getStatus().equals(OrderStatus.ORDER_COMPLETED)){
                         mListStorePickup.add(o);                    }
                 }
                 return new OrderHistory_StorePickup_Fragment(mListStorePickup);
             case 1:
                 for(Order o: mListOrder){
-                    if(o.getShip_type().equals(OrderType.DELIVERY)){
+                    if(o.getShip_type().equals(OrderType.DELIVERY) && (o.getStatus().equals(OrderStatus.DELIVERED) ||
+                            o.getStatus().equals(OrderStatus.DELIVERY_FAILED))){
                         mListPreparing.add(o);                    }
                 }
                 return new OrderHistory_Delivery_Fragment(mListPreparing);
@@ -54,9 +55,10 @@ public class ViewPagerOrderHistoryAdapter extends FragmentStateAdapter {
 
     public void getDataOrder(){
         mListOrder.clear();
-        mListOrder.add(new Order(100, OrderType.DELIVERY, OrderStatus.PREPARING, userId));
-        mListOrder.add(new Order(130, OrderType.STORE_PICKUP,OrderStatus.ORDER_RECEIVED, userId));
+        mListOrder.add(new Order(100, OrderType.DELIVERY, OrderStatus.DELIVERED, userId));
+        mListOrder.add(new Order(130, OrderType.STORE_PICKUP,OrderStatus.ORDER_COMPLETED, userId));
         mListOrder.add(new Order(1302, OrderType.DELIVERY,OrderStatus.DELIVERED, userId));
         mListOrder.add(new Order(1303, OrderType.DELIVERY,OrderStatus.DELIVERY_FAILED, userId));
+        mListOrder.add(new Order(13031, OrderType.STORE_PICKUP,OrderStatus.ORDER_COMPLETED, userId));
     }
 }

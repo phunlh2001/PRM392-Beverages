@@ -1,5 +1,6 @@
 package com.phunlh2001.prm392_beverages;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -68,7 +69,9 @@ public class Store_pickup_Status_Fragment extends Fragment {
         //Onclick LinearLayout to go Order Detail
         LinearLayout orderDetail = (LinearLayout) view.findViewById(R.id.order_detail);
         orderDetail.setOnClickListener(v -> {
-            Toast.makeText(view.getContext(), "Order detail of Store pickup", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity().getBaseContext(), OrderDetail.class);
+            intent.putExtra("message", "Message");
+            getActivity().startActivity(intent);
         });
         return view;
     }

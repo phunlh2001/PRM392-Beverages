@@ -1,5 +1,6 @@
 package com.phunlh2001.prm392_beverages;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.phunlh2001.prm392_beverages.adapters.OrderHistoryAdapter;
 import com.phunlh2001.prm392_beverages.data.entities.Order;
@@ -40,11 +42,23 @@ public class OrderHistory_Delivery_Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        orderHistoryAdapter = new OrderHistoryAdapter(getContext(), mListOrder, "DELIVERY", new OrderHistoryAdapter.IClickItem() {
+            @Override
+            public void onBindItem(Order order) {
+                bindItemDetail(order);
+            }
+        });
         rcv = view.findViewById(R.id.rcv);
         rcv.setLayoutManager(new LinearLayoutManager(getContext()));
         rcv.setHasFixedSize(true);
-        orderHistoryAdapter = new OrderHistoryAdapter(getContext(), mListOrder, "DELIVERY");
         rcv.setAdapter(orderHistoryAdapter);
         orderHistoryAdapter.notifyDataSetChanged();
+    }
+
+    public void bindItemDetail(Order order){
+        Intent intent = new Intent(getActivity().getBaseContext(), OrderDetail.class);
+        intent.putExtra("message", String.valueOf(order.getStatus()));
+        getActivity().startActivity(intent);
     }
 }
