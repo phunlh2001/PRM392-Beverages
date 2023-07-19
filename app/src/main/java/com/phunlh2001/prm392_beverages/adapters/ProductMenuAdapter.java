@@ -5,8 +5,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,6 +50,18 @@ public class ProductMenuAdapter extends RecyclerView.Adapter<ProductMenuAdapter.
         holder.thumbnail.setImageResource(resourceId);
         holder.title.setText(prod.getTitle());
         holder.price.setText("" + prod.getPrice());
+        
+        holder.btnDetail.setOnClickListener(view -> {
+            Toast.makeText(holder.itemView.getContext(), "Goto Detail", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(holder.itemView.getContext(), ShowDetailActivity.class);
+//            intent.putExtras("product", prod.get(position));
+//            holder.itemView.getContext().startActivity(intent);
+        });
+        
+        holder.btnAddToCart.setOnClickListener(view -> {
+            // cart.insert(prod.get(position));
+            Toast.makeText(holder.itemView.getContext(), "Add to cart successfully", Toast.LENGTH_SHORT).show();
+        });
     }
 
     @Override
@@ -58,6 +72,7 @@ public class ProductMenuAdapter extends RecyclerView.Adapter<ProductMenuAdapter.
     public static class MenuViewHolder extends RecyclerView.ViewHolder {
         TextView title, price;
         ImageView thumbnail;
+        Button btnAddToCart, btnDetail;
 
         public MenuViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,6 +80,8 @@ public class ProductMenuAdapter extends RecyclerView.Adapter<ProductMenuAdapter.
             title = itemView.findViewById(R.id.menu_item_title);
             price = itemView.findViewById(R.id.menu_item_price);
             thumbnail = itemView.findViewById(R.id.img_item_menu);
+            btnAddToCart = itemView.findViewById(R.id.btnAddToCart);
+            btnDetail = itemView.findViewById(R.id.btnDetail);
         }
     }
 }

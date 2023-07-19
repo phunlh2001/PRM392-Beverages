@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginVertical="8dp"
+    android:layout_marginVertical="4dp"
     app:cardCornerRadius="6dp">
 
     <LinearLayout
@@ -36,13 +36,24 @@
             android:textSize="16sp"
             android:gravity="center"/>
 
-        <Button
+        <android.widget.Button
+            android:id="@+id/btnAddToCart"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="20dp"
             android:background="@drawable/custom_button"
             android:text="Add to cart"
             android:textColor="@color/black"
-            android:textSize="12dp" />
+            android:textSize="8dp"
+            android:layout_marginBottom="4dp" />
+
+        <android.widget.Button
+            android:id="@+id/btnDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:background="@drawable/custom_button"
+            android:text="Detail"
+            android:textColor="@color/black"
+            android:textSize="8dp" />
 
     </LinearLayout>
 
