@@ -29,7 +29,7 @@ public class User implements Serializable {
         this.address = address;
         this.phone_number = phone_number;
 
-        this.avatar = "blank_avatar.jpg";
+        this.avatar = "blank_avatar";
         this.role = RoleAccount.USER;
         this.createAt = new Date();
     }

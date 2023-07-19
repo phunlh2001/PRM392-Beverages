@@ -27,9 +27,6 @@ public interface UserDao {
     @Query("SELECT * FROM users")
     List<User> getAll();
 
-    @Query("SELECT * FROM users WHERE id=:id")
-    User getById(int id);
-
     @Transaction
     @Query("SELECT * FROM users")
     List<UserEmbedded> getAllOrderOfUser();

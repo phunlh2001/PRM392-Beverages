@@ -1,31 +1,13 @@
 package com.phunlh2001.prm392_beverages;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.phunlh2001.prm392_beverages.data.AppDatabase;
-import com.phunlh2001.prm392_beverages.data.dao.UserDao;
-import com.phunlh2001.prm392_beverages.data.entities.User;
-
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -78,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = edtPwd.getText().toString().trim();
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Must be fulfill input", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Must be fill in all blank", Toast.LENGTH_SHORT).show();
         } else {
             User user = userDao.getUserByEmail(email);
             if (user == null || !user.getPassword().equals(Hash.Md5(password))) {
