@@ -37,7 +37,6 @@
             android:gravity="center"/>
 
         <Button
-            style="@style/border_radius"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:background="@drawable/custom_button"
