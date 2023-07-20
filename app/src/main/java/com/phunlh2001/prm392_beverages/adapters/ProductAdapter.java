@@ -28,6 +28,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MenuView
 
     public void setData(List<Product> list) {
         _products = list;
+        notifyDataSetChanged();
     }
 
     @NonNull

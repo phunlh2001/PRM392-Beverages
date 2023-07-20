@@ -32,4 +32,7 @@ public interface ProductDao {
     @Transaction
     @Query("SELECT * FROM products")
     List<ProductWithOrdersRef> getAllOrderHaveProduct();
+
+    @Query("SELECT * FROM products WHERE title LIKE '%' || :name || '%'")
+    List<Product> searchProduct(String name);
 }

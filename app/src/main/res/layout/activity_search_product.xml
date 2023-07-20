@@ -52,13 +52,35 @@
             android:drawableLeft="@drawable/store_image"
             android:text="Dia chi giao hang" />
 
-        <SearchView
-            android:id="@+id/searchbar"
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:queryHint="What are you craving for?"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bogoc_stroke"/>
+            android:orientation="horizontal"
+            android:background="@drawable/bg_white_border_grey"
+            android:weightSum="4">
+
+            <EditText
+                android:id="@+id/edt_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="3.2"
+                android:hint="  What are you looking for?"
+                android:imeOptions="actionSearch"
+                android:inputType="text" />
+            <android.widget.Button
+                android:id="@+id/btn_search"
+                android:layout_weight="0.5"
+                android:layout_width="13dp"
+                android:layout_height="20dp"
+                android:background="@drawable/search_icon" />
+
+        </LinearLayout>
+
+
+
     </LinearLayout>
 
     <TextView
@@ -67,8 +89,7 @@
         android:text="Popular drinks and foods"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:layout_marginBottom="20dp"
-        android:shadowDx="@integer/material_motion_duration_medium_2" />
+        android:layout_marginBottom="20dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
