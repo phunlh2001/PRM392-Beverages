@@ -1,5 +1,8 @@
 package com.phunlh2001.prm392_beverages;
 
+import static com.phunlh2001.prm392_beverages.utils.Constant.KEY_LOGIN;
+import static com.phunlh2001.prm392_beverages.utils.Constant.PREF_LOGIN;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,9 +20,6 @@ import com.phunlh2001.prm392_beverages.data.entities.User;
 import com.phunlh2001.prm392_beverages.utils.Hash;
 
 public class LoginActivity extends AppCompatActivity {
-
-    public static final String PREF_LOGIN = "PrefBeveragesLogin";
-    public static final String KEY_LOGIN = "User_Email";
 
     private EditText edtEmail, edtPwd;
     private Button btnLogin, btnRegister;
