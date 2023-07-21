@@ -1,6 +1,7 @@
 package com.phunlh2001.prm392_beverages;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,11 +17,14 @@ public class ProductDetailActivity extends AppCompatActivity {
     private TextView tvName;
     private TextView tvPrice;
     private TextView tvDes;
+    private ImageView ivProduct;
     private ProductDao productDao;
+
     private void init() {
         tvName = findViewById(R.id.menu_item_title);
         tvPrice = findViewById(R.id.menu_item_price);
         tvDes = findViewById(R.id.menu_item_des);
+        ivProduct = findViewById(R.id.img_item_menu);
 
         //khoi tao dao
         productDao = AppDatabase.getInstance(this).productDao();
@@ -58,10 +62,13 @@ public class ProductDetailActivity extends AppCompatActivity {
 
             if (productQuery != null) {
                 // fill data to UI
+                int resourceId = getResources()
+                        .getIdentifier(productQuery.getThumbnail(), "drawable", getPackageName());
 
                     tvName.setText(productQuery.getTitle());
                     tvPrice.setText(Double.toString(productQuery.getPrice()));
                     tvDes.setText(productQuery.getDesc());
+                    ivProduct.setImageResource(resourceId);
 
             } else Toast.makeText(this, "Error: Data is NULL", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
