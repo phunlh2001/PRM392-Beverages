@@ -1,25 +1,37 @@
 package com.phunlh2001.prm392_beverages;
 
+import static com.phunlh2001.prm392_beverages.utils.Constant.KEY_ADDRESS;
+import static com.phunlh2001.prm392_beverages.utils.Constant.PREF_ADDRESS;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.phunlh2001.prm392_beverages.data.AppDatabase;
-import com.phunlh2001.prm392_beverages.data.dao.UserDao;
-import com.phunlh2001.prm392_beverages.data.entities.User;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.phunlh2001.prm392_beverages.viewmodel.AddressViewModel;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NewAddressActivity extends AppCompatActivity {
 
     private EditText edtAddress, edtName, edtPhone;
     private Button btnSave;
 
-    private User user;
-    private UserDao userDao;
+    private List<AddressViewModel> addressList;
+    private Gson gson;
+    private SharedPreferences pref;
 
     String strName, strPhone, strAddress;
 
@@ -28,9 +40,12 @@ public class NewAddressActivity extends AppCompatActivity {
         edtName = findViewById(R.id.edt_recipient_name);
         edtPhone = findViewById(R.id.edt_recipient_phone);
         btnSave = findViewById(R.id.btnSaveAddress);
-        userDao = AppDatabase.getInstance(this).userDao();
+        addressList = new ArrayList<>();
+        pref = getSharedPreferences(PREF_ADDRESS, Context.MODE_PRIVATE);
+        gson = new Gson();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +53,11 @@ public class NewAddressActivity extends AppCompatActivity {
         init();
 
         try {
-            user = (User) getIntent().getExtras().get("user");
-            if (user != null) {
-                edtAddress.setText(user.getAddress());
-                edtName.setText(user.getFull_name());
-                edtPhone.setText(user.getPhone_number());
+            AddressViewModel address = (AddressViewModel) getIntent().getExtras().get("address");
+            if (address != null) {
+                edtAddress.setText(address.getAddress());
+                edtName.setText(address.getName());
+                edtPhone.setText(address.getPhone());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,44 +66,30 @@ public class NewAddressActivity extends AppCompatActivity {
         btnSave.setOnClickListener(v -> handleClickSave());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void handleClickSave() {
-        getData();
-        User _userExist = userDao.getById(user.getId());
-        if (_userExist == null) {
-            insertAddress();
-        } else {
-            updateAddress();
-        }
-    }
-
-    private void insertAddress() {
-        try {
-            userDao.insert(user);
-            Toast.makeText(this, "Insert address successfully", Toast.LENGTH_LONG).show();
-            navigateToHome();
-            finish();
-        } catch (Exception e) {
-            Toast.makeText(this, "Insert address failed", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-    }
-
-    private void updateAddress() {
-        try {
-            userDao.update(user);
-            Toast.makeText(this, "Update address successfully", Toast.LENGTH_LONG).show();
-            navigateToHome();
-            finish();
-        } catch (Exception e) {
-            Toast.makeText(this, "Update address failed", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-    }
-
-    private void getData() {
         strName = edtName.getText().toString().trim();
         strAddress = edtAddress.getText().toString().trim();
         strPhone = edtPhone.getText().toString().trim();
+        try {
+            if (TextUtils.isEmpty(strAddress) || TextUtils.isEmpty(strName) || TextUtils.isEmpty(strPhone)) {
+                throw new Exception("Must be full all blank");
+            } else if (!strPhone.matches("^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$")) {
+                throw new Exception("Phone number incorrect");
+            } else {
+                addressList = getList();
+                if (containsName(addressList, strName)) {
+                    addressList.removeIf(obj -> obj.getName().equals(strName));
+                }
+                AddressViewModel address = new AddressViewModel(strName, strPhone, strAddress);
+                addressList.add(address);
+                setList(addressList);
+                navigateToHome();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
 
     private void navigateToHome() {
@@ -96,10 +97,26 @@ public class NewAddressActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    private <T> void getListToSpinner(ArrayAdapter<T> adapter, @NonNull Spinner spinner, T[] list) {
-//        adapter = new ArrayAdapter<>(this, R.layout.address_spinner_item, list);
-//        adapter.setDropDownViewResource(R.layout.address_spinner_item);
-//        spinner.setAdapter(cityAdapter);
-//        spinner.setSelection(0);
-//    }
+    private void setList(List<AddressViewModel> list) {
+        SharedPreferences.Editor editor = pref.edit();
+        String json = gson.toJson(list);
+
+        editor.putString(KEY_ADDRESS, json);
+        editor.apply();
+    }
+
+    private List<AddressViewModel> getList() {
+        List<AddressViewModel> arrItems = new ArrayList<>();
+        String json = pref.getString(KEY_ADDRESS, null);
+        if (json != null) {
+            Type type = new TypeToken<List<AddressViewModel>>(){}.getType();
+            arrItems = gson.fromJson(json, type);
+        }
+        return arrItems;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private boolean containsName(List<AddressViewModel> list, String text) {
+        return list.stream().anyMatch(p -> p.getName().equals(text));
+    }
 }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,11 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.phunlh2001.prm392_beverages.R;
 import com.phunlh2001.prm392_beverages.data.entities.User;
 import com.phunlh2001.prm392_beverages.helper.ISavedPlace;
+import com.phunlh2001.prm392_beverages.viewmodel.AddressViewModel;
 
 import java.util.List;
 
 public class SavedPlaceAdapter extends RecyclerView.Adapter<SavedPlaceAdapter.SavedPlaceViewHolder> {
-    List<User> userList;
+    private List<AddressViewModel> addressList;
     private final ISavedPlace iClickItem;
 
     public SavedPlaceAdapter(ISavedPlace iClickItem) {
@@ -25,8 +27,8 @@ public class SavedPlaceAdapter extends RecyclerView.Adapter<SavedPlaceAdapter.Sa
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void setData(List<User> list) {
-        userList = list;
+    public void setData(List<AddressViewModel> list) {
+        addressList = list;
         notifyDataSetChanged();
     }
 
@@ -39,27 +41,27 @@ public class SavedPlaceAdapter extends RecyclerView.Adapter<SavedPlaceAdapter.Sa
 
     @Override
     public void onBindViewHolder(@NonNull SavedPlaceViewHolder holder, int position) {
-        User user = userList.get(position);
-        if (user == null) return;
+        AddressViewModel address = addressList.get(position);
+        if (address == null) return;
 
-        holder.tvName.setText(user.getFull_name());
-        holder.tvPhone.setText(user.getPhone_number());
-        holder.tvAddress.setText(user.getAddress());
+        holder.tvName.setText(address.getName());
+        holder.tvPhone.setText(address.getPhone());
+        holder.tvAddress.setText(address.getAddress());
 
-        holder.btnEdit.setOnClickListener(v -> {
-            iClickItem.onClickEditAddress(user);
-            iClickItem.onClickDeleteAddress(user);
-        });
+        holder.btnEdit.setOnClickListener(v -> iClickItem.onClickEditAddress(address));
+        holder.btnDelete.setOnClickListener(v -> iClickItem.onClickDeleteAddress(address));
+        holder.btnClickItem.setOnClickListener(v -> iClickItem.onClickItemAddress(address));
     }
 
     @Override
     public int getItemCount() {
-        return userList != null ? userList.size() : 0;
+        return addressList != null ? addressList.size() : 0;
     }
 
     public static class SavedPlaceViewHolder extends RecyclerView.ViewHolder {
         TextView tvAddress, tvName, tvPhone;
         ImageView btnEdit, btnDelete;
+        LinearLayout btnClickItem;
 
         public SavedPlaceViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -67,8 +69,9 @@ public class SavedPlaceAdapter extends RecyclerView.Adapter<SavedPlaceAdapter.Sa
             tvAddress = itemView.findViewById(R.id.addressSelector_address);
             tvName = itemView.findViewById(R.id.addressSelector_name);
             tvPhone = itemView.findViewById(R.id.addressSelector_numberPhone);
-            btnEdit = itemView.findViewById(R.id.btn_edit_user_address);
-            btnDelete = itemView.findViewById(R.id.btn_delete_user_address);
+            btnEdit = itemView.findViewById(R.id.btn_address_edit);
+            btnDelete = itemView.findViewById(R.id.btn_address_delete);
+            btnClickItem = itemView.findViewById(R.id.addressSelector_item);
         }
     }
 }

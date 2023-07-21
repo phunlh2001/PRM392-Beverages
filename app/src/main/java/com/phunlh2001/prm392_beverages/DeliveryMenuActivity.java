@@ -1,7 +1,7 @@
 package com.phunlh2001.prm392_beverages;
 
-import static com.phunlh2001.prm392_beverages.LoginActivity.KEY_LOGIN;
-import static com.phunlh2001.prm392_beverages.LoginActivity.PREF_LOGIN;
+import static com.phunlh2001.prm392_beverages.utils.Constant.KEY_LOGIN;
+import static com.phunlh2001.prm392_beverages.utils.Constant.PREF_LOGIN;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.phunlh2001.prm392_beverages.adapters.CategoryAdapter;
@@ -20,6 +22,7 @@ import com.phunlh2001.prm392_beverages.data.dao.ProductDao;
 import com.phunlh2001.prm392_beverages.data.dao.UserDao;
 import com.phunlh2001.prm392_beverages.data.entities.Product;
 import com.phunlh2001.prm392_beverages.data.entities.User;
+import com.phunlh2001.prm392_beverages.viewmodel.AddressViewModel;
 import com.phunlh2001.prm392_beverages.viewmodel.CategoryViewModel;
 
 import java.util.ArrayList;
@@ -28,6 +31,7 @@ import java.util.List;
 public class DeliveryMenuActivity extends AppCompatActivity {
 
     private TextView tvAddress, tvName, tvPhone;
+    private ImageView btnNavigate;
 
     private RecyclerView rcvMenu, rcvCate;
     private ProductMenuAdapter productMenuAdapter;
@@ -42,6 +46,7 @@ public class DeliveryMenuActivity extends AppCompatActivity {
         tvAddress = findViewById(R.id.deliveryTo_address);
         tvName = findViewById(R.id.deliveryTo_name);
         tvPhone = findViewById(R.id.deliveryTo_numberPhone);
+        btnNavigate = findViewById(R.id.btn_address_navigate_delivery);
         rcvMenu = findViewById(R.id.rcv_menu);
         rcvCate = findViewById(R.id.rcv_cates);
         productMenuAdapter = new ProductMenuAdapter(this);
@@ -57,14 +62,15 @@ public class DeliveryMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_delivery_menu);
         initialize();
 
-        String email = pref.getString(KEY_LOGIN, "");
-        User user = userDao.getUserByEmail(email);
-        tvAddress.setText(user.getAddress());
-        tvName.setText(user.getFull_name());
-        tvPhone.setText(user.getPhone_number());
+        handleAddressDelivery();
 
         recyclerViewCategory();
         recyclerViewProduct();
+
+        btnNavigate.setOnClickListener(v -> {
+            Intent intent = new Intent(DeliveryMenuActivity.this, AddressSelectorActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void recyclerViewCategory() {
@@ -90,5 +96,20 @@ public class DeliveryMenuActivity extends AppCompatActivity {
         List<Product> _list = productDao.getAll();
         productMenuAdapter.setData(_list);
         rcvMenu.setAdapter(productMenuAdapter);
+    }
+
+    private void handleAddressDelivery() {
+        try {
+            AddressViewModel _add = (AddressViewModel) getIntent().getExtras().get("addressItem");
+            tvAddress.setText(_add.getAddress());
+            tvName.setText(_add.getName());
+            tvPhone.setText(_add.getPhone());
+        } catch (Exception e) {
+            String email = pref.getString(KEY_LOGIN, "");
+            User user = userDao.getUserByEmail(email);
+            tvAddress.setText(user.getAddress());
+            tvName.setText(user.getFull_name());
+            tvPhone.setText(user.getPhone_number());
+        }
     }
 }

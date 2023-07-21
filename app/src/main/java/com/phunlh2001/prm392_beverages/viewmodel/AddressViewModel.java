@@ -1,6 +1,8 @@
 package com.phunlh2001.prm392_beverages.viewmodel;
 
-public class AddressViewModel {
+import java.io.Serializable;
+
+public class AddressViewModel implements Serializable {
     private String name, phone, address;
 
     public AddressViewModel(String name, String phone, String address) {
