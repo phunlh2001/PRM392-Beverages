@@ -25,7 +25,9 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, GetStartActivity.class);
             startActivity(intent);
         } else {
-            // [TODO] Navigate to your layout to testing here
+            // [TODO] Navigate to your layout for testing here
+            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            startActivity(intent);
         }
     }
 }
