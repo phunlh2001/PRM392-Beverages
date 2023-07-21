@@ -23,7 +23,7 @@ public class CartRepo {
 
     public CartRepo(Application application){
         cartDao = AppDatabase.getInstance(application).cartDao();
-        allCartItemsLiveData = cartDao.getAllCartItems();
+//        allCartItemsLiveData = cartDao.getAllCartItems();
     }
 
     public void insertCartItem(OrderDetail orderDetail){
@@ -66,7 +66,7 @@ public class CartRepo {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                cartDao.getProductPriceById(product_id);
+//                cartDao.getProductPriceById(product_id);
             }
         });
     }
