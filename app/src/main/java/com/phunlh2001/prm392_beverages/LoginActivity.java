@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
 import com.phunlh2001.prm392_beverages.data.AppDatabase;
 import com.phunlh2001.prm392_beverages.data.dao.UserDao;
 import com.phunlh2001.prm392_beverages.data.entities.User;
@@ -68,12 +69,18 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "Email or password incorrect", Toast.LENGTH_SHORT).show();
             } else {
                 // Đăng nhập thành công, chuyển sang ProfileActivity và truyền thông tin người dùng qua Intent
-                Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
-                intent.putExtra("user_name", user.getFull_name());
-                intent.putExtra("email", user.getEmail());
-                intent.putExtra("phone", user.getPhone_number());
-                intent.putExtra("full_name", user.getFull_name());
-                startActivity(intent);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString(KEY_LOGIN, email);
+                boolean isLogin = editor.commit();
+
+                if (isLogin) {
+                    Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }
