@@ -62,12 +62,12 @@ public class CartRepo {
         });
     }
 
-    public void getProductPriceById(int product_id){
+    /*public void getProductPriceById(int product_id){
         executor.execute(new Runnable() {
             @Override
             public void run() {
                 cartDao.getProductPriceById(product_id);
             }
         });
-    }
+    }*/
 }

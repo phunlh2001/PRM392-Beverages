@@ -25,9 +25,9 @@ public interface CartDao {
             "WHERE product_id=:product_id AND order_id=:order_id")
     void updateQuantity(int product_id, int order_id, int quantity);
 
-    @Query("SELECT price FROM Products INNER JOIN OrderDetails ON OrderDetails.product_id = Products.id " +
+    /*@Query("SELECT price FROM Products INNER JOIN OrderDetails ON OrderDetails.product_id = Products.id " +
             "WHERE product_id=:product_id")
-    void getProductPriceById(int product_id);
+    void getProductPriceById(int product_id);*/
 
     @Query("DELETE FROM OrderDetails")
     void deleteAllItems();

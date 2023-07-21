@@ -39,7 +39,7 @@ public class CartViewModel extends AndroidViewModel {
         cartRepo.deleteAllCartItems();
     }
 
-    public void getProductPriceById(int product_id) {
+    /*public void getProductPriceById(int product_id) {
         cartRepo.getProductPriceById(product_id);
-    }
+    }*/
 }

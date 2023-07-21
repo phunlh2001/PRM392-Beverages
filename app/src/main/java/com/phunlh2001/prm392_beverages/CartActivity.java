@@ -40,11 +40,13 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.CartC
                 double price = 0;
                 cartAdapter.setProductCartList(orderDetails);
                 for (int i=0;i<orderDetails.size();i++) {
-                    price = price + (orderDetails.get(i).getQuantity() * cartViewModel.getProductPriceById());
+                    //price = price + (orderDetails.get(i).getQuantity() * cartViewModel.getProductPriceById());
                 }
                 tvTotalCartPrice.setText(String.valueOf(price));
             }
         });
+
+
 
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
