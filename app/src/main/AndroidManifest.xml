@@ -25,7 +25,8 @@
             android:exported="false"/>
         <activity
             android:name=".OrderDetail"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Order detail"/>
         <activity
             android:name=".OrderHistory"
             android:label="Order history"
