@@ -30,6 +30,9 @@ public interface OrderDao {
     @Query("SELECT * FROM orders WHERE id=:id")
     Order getById(int id);
 
+    @Query("SELECT * FROM orders WHERE user_id=:id")
+    List<Order> getOrderByUserId(int id);
+
     @Transaction
     @Query("SELECT * FROM orders")
     List<OrderWithProductsRef> getAllProductInOrder();
