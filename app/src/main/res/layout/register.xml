@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:layout_margin="12dp"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@drawable/iphone_13_pro_max___3"
+    >
 
     <TextView
         android:layout_width="245dp"
@@ -63,6 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Up"
+        android:backgroundTint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Password" />
 </LinearLayout>

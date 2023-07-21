@@ -60,24 +60,20 @@ public class LoginActivity extends AppCompatActivity {
         String password = edtPwd.getText().toString().trim();
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Must be fill in all blank", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Must fill in all blanks", Toast.LENGTH_SHORT).show();
         } else {
+            // Kiểm tra thông tin đăng nhập trong cơ sở dữ liệu
             User user = userDao.getUserByEmail(email);
             if (user == null || !user.getPassword().equals(Hash.Md5(password))) {
                 Toast.makeText(this, "Email or password incorrect", Toast.LENGTH_SHORT).show();
             } else {
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString(KEY_LOGIN, email);
-                boolean isLogin = editor.commit();
-
-                if (isLogin) {
-                    Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
-                }
+                // Đăng nhập thành công, chuyển sang ProfileActivity và truyền thông tin người dùng qua Intent
+                Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                intent.putExtra("user_name", user.getFull_name());
+                intent.putExtra("email", user.getEmail());
+                intent.putExtra("phone", user.getPhone_number());
+                intent.putExtra("full_name", user.getFull_name());
+                startActivity(intent);
             }
         }
     }
