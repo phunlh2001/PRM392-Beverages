@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:title="History"
-        android:id="@+id/history"
-        android:icon="@drawable/img_history"
+        android:id="@+id/search"
+        android:icon="@drawable/search_icon"
         app:showAsAction="ifRoom"/>
     <item android:title="Dot"
         android:id="@+id/dot"

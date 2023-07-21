@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.phunlh2001.prm392_beverages.adapters.ViewPagerOrderManagementAdapter;
 
@@ -31,7 +32,29 @@ public class OrderManagement extends AppCompatActivity {
 
         /*Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);*/
-
+        //Nav
+        BottomNavigationView navigationView = findViewById(R.id.bottomNav);
+        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            Intent intent;
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.home:
+                        intent = new Intent(OrderManagement.this, HomeActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.order:
+                        intent = new Intent(OrderManagement.this, OrderManagement.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.profile:
+                        intent = new Intent(OrderManagement.this, ProfileActivity.class);
+                        startActivity(intent);
+                        break;
+                }
+                return true;
+            }
+        });
         //Fragment
         //Test fragment order management
         mTabLayout = findViewById(R.id.tab_layout);
@@ -87,9 +110,10 @@ public class OrderManagement extends AppCompatActivity {
             Intent intent = new Intent(this, OrderHistory.class);
             startActivity(intent);
         } else if (id == R.id.action1) {
-            Toast.makeText(this, "Action 1 clicked", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.action2) {
-            Toast.makeText(this, "Action 2 clicked", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
+            SharedPreferences pref = getSharedPreferences(PREF_LOGIN, Context.MODE_PRIVATE);
+            pref.edit().remove(KEY_LOGIN).commit();
+            startActivity(new Intent(this, LoginActivity.class));
         } else if (id == R.id.exit) {
             Toast.makeText(this, "Exit", Toast.LENGTH_SHORT).show();
         }
