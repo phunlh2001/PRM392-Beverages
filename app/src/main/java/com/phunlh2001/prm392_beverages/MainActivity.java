@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         } else {
             // [TODO] Navigate to your layout to testing here
-            Intent intent = new Intent(MainActivity.this, DeliveryMenuActivity.class);
+            Intent intent = new Intent(MainActivity.this, StoreMenuActivity.class);
             startActivity(intent);
         }
     }
