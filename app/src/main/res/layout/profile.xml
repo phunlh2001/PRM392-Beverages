@@ -11,6 +11,7 @@
         android:id="@+id/text_user"
         >
         <TextView
+            android:id="@+id/tvUser"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_alignParentTop="true"
@@ -18,7 +19,7 @@
             android:text="User"
             android:textColor="@color/black"
             android:textAlignment="center"
-            android:textSize="50dp" />
+            android:textSize="30dp" />
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -51,12 +52,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="20dp"
+            android:text="Test"
             android:textColor="#FFFFFF"
-            android:textSize="32sp"
+            android:textSize="24dp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvEmail"
+            android:id="@+id/tvJoindate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvFullName"

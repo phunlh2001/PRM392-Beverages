@@ -19,9 +19,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Chuyển đến GetStartActivity
-        Intent intent = new Intent(MainActivity.this, GetStartActivity.class);
-        startActivity(intent);
-        finish(); // Để loại bỏ MainActivity khỏi ngăn xếp (stack) và không thể quay lại nó sau khi chuyển đến GetStartActivity.
+        SharedPreferences pref = getSharedPreferences(PREF_LOGIN, Context.MODE_PRIVATE);
+        String email = pref.getString(KEY_LOGIN, "");
+        if (email.isEmpty()) {
+            Intent intent = new Intent(MainActivity.this, GetStartActivity.class);
+            startActivity(intent);
+        } else {
+            // [TODO] Navigate to your layout for testing here
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            startActivity(intent);
+        }
     }
 }
