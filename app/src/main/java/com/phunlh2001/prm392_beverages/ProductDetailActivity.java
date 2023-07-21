@@ -11,6 +11,7 @@ import com.phunlh2001.prm392_beverages.data.AppDatabase;
 import com.phunlh2001.prm392_beverages.data.dao.ProductDao;
 import com.phunlh2001.prm392_beverages.data.entities.Product;
 
+@SuppressWarnings("unchecked")
 public class ProductDetailActivity extends AppCompatActivity {
     private Product productQuery;
     private Product product;
@@ -48,7 +49,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                 //Truy xuat CSDL =sId de lay full thong tin
                 retrieveDataFromDBtoUI(sId);
             } catch (Exception e) {
-                Toast.makeText(this, "Error" + e.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
 
