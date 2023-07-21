@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"/>
 
     <LinearLayout
+        android:id="@+id/addressSelector_item"
         android:paddingEnd="8dp"
         android:orientation="vertical"
         android:layout_width="wrap_content"
@@ -63,13 +64,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <ImageView
-            android:id="@+id/btn_edit_user_address"
+            android:id="@+id/btn_address_edit"
             android:src="@drawable/ic_pen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <ImageView
-            android:id="@+id/btn_delete_user_address"
+            android:id="@+id/btn_address_delete"
             android:src="@drawable/ic_address_bin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

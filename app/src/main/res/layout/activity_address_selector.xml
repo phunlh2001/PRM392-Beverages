@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:text="Use current address"
+                android:text="Use account address"
                 android:textColor="@color/silver"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -47,10 +47,11 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_marginStart="112dp"
-            android:layout_width="wrap_content"
+            android:onClick="useCurrentAddress"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_address_book_click" />
+            android:src="@drawable/ic_address_book_click"
+            android:scaleType="fitEnd"/>
 
     </LinearLayout>
 
