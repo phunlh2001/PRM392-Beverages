@@ -1,6 +1,8 @@
 package com.phunlh2001.prm392_beverages.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +40,9 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
         if(orderInfo == null){
             return;
         }
-        holder.img.setImageResource(R.drawable.img_clock);
+
+        int resourceId = context.getResources().getIdentifier(orderInfo.getThumbnail(), "drawable", context.getPackageName());
+        holder.img.setImageResource(resourceId);
         holder.txtproductName.setText(orderInfo.getTitle());
         holder.txtpriceAndQuantity.setText(String.valueOf(orderInfo.getPrice()) + "đ" + " x" + String.valueOf(orderInfo.getQuantity()));
     }

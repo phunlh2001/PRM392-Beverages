@@ -4,10 +4,6 @@
         android:icon="@drawable/img_home_bottomnav"
         >
     </item>
-    <item android:id="@+id/store"
-        android:icon="@drawable/img_store_bottonnav"
-      >
-    </item>
     <item android:id="@+id/order"
         android:icon="@drawable/img_order_bottomnav"
         >
