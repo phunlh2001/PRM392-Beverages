@@ -35,4 +35,7 @@ public interface ProductDao {
 
     @Query("SELECT * FROM products WHERE title LIKE '%' || :name || '%'")
     List<Product> searchProduct(String name);
+
+//    @Query("SELECT * FROM products WHERE id=:id")
+//    List<Product> getListProductById(int id);
 }
