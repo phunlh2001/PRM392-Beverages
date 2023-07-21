@@ -2,6 +2,8 @@ package com.phunlh2001.prm392_beverages.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.phunlh2001.prm392_beverages.ProductDetailActivity;
 import com.phunlh2001.prm392_beverages.R;
 import com.phunlh2001.prm392_beverages.data.entities.Product;
 
@@ -52,10 +55,11 @@ public class ProductMenuAdapter extends RecyclerView.Adapter<ProductMenuAdapter.
         holder.price.setText("" + prod.getPrice());
         
         holder.btnDetail.setOnClickListener(view -> {
-            Toast.makeText(context, "Goto Detail", Toast.LENGTH_SHORT).show();
-//            Intent intent = new Intent(context(), ShowDetailActivity.class);
-//            intent.putExtras("product", prod.get(position));
-//            context.startActivity(intent);
+            Intent intent = new Intent(context, ProductDetailActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("object_product", prod);
+            intent.putExtras(bundle);
+            context.startActivity(intent);
         });
         
         holder.btnAddToCart.setOnClickListener(view -> {

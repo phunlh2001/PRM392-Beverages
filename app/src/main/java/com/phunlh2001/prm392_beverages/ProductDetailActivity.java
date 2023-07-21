@@ -1,5 +1,6 @@
 package com.phunlh2001.prm392_beverages;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,11 +46,11 @@ public class ProductDetailActivity extends AppCompatActivity {
             //fill data to UI
             try {
                 //Truy xuat ID tu bundle lay duoc tu RecylerView
-                Integer sId = (Integer) product.getId();
+                int sId = product.getId();
                 //Truy xuat CSDL =sId de lay full thong tin
                 retrieveDataFromDBtoUI(sId);
             } catch (Exception e) {
-                Toast.makeText(this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -57,23 +58,24 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
     //lay du lieu thong qua id
+    @SuppressLint("SetTextI18n")
     private void retrieveDataFromDBtoUI(int ID) {
         try {
-             productQuery = (Product) productDao.getById(ID);
-
+             productQuery = productDao.getById(ID);
             if (productQuery != null) {
                 // fill data to UI
+                @SuppressLint("DiscouragedApi")
                 int resourceId = getResources()
                         .getIdentifier(productQuery.getThumbnail(), "drawable", getPackageName());
 
                     tvName.setText(productQuery.getTitle());
-                    tvPrice.setText(Double.toString(productQuery.getPrice()));
+                    tvPrice.setText("" + productQuery.getPrice());
                     tvDes.setText(productQuery.getDesc());
                     ivProduct.setImageResource(resourceId);
 
             } else Toast.makeText(this, "Error: Data is NULL", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(this, "Error" + e.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
