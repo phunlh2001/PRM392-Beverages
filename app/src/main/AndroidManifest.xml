@@ -22,6 +22,38 @@
             android:name=".CartActivity"
             android:exported="false" />
         <activity
+            android:name=".StoreMenuActivity"
+            android:label="Store pickup"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".NewAddressActivity"
+            android:exported="false"
+            android:label="New address">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AddressSelectorActivity"
+            android:exported="false"
+            android:label="Deliver to">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DeliveryMenuActivity"
+            android:exported="false"
+            android:label="Delivery">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity

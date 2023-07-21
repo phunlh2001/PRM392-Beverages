@@ -1,7 +1,7 @@
 package com.phunlh2001.prm392_beverages;
 
-import static com.phunlh2001.prm392_beverages.LoginActivity.KEY_LOGIN;
-import static com.phunlh2001.prm392_beverages.LoginActivity.PREF_LOGIN;
+import static com.phunlh2001.prm392_beverages.utils.Constant.KEY_LOGIN;
+import static com.phunlh2001.prm392_beverages.utils.Constant.PREF_LOGIN;
 
 import androidx.appcompat.app.AppCompatActivity;
 
