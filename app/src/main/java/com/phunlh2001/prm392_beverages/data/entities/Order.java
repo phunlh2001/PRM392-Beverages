@@ -9,6 +9,7 @@ import androidx.room.PrimaryKey;
 import com.phunlh2001.prm392_beverages.data.entities.enums.OrderStatus;
 import com.phunlh2001.prm392_beverages.data.entities.enums.OrderType;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity(tableName = "Orders",
@@ -17,7 +18,7 @@ import java.util.Date;
                 childColumns = "user_id",
                 onDelete = ForeignKey.CASCADE),
         indices = @Index(value = "user_id"))
-public class Order {
+public class Order implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private double total_price;

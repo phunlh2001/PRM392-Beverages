@@ -67,6 +67,7 @@
                     android:layout_marginEnd="10dp">
 
                     <ImageView
+                        android:id="@+id/locationStore"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:src="@drawable/img_home"></ImageView>

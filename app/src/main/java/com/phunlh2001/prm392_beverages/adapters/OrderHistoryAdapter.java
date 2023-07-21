@@ -14,9 +14,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.phunlh2001.prm392_beverages.R;
+import com.phunlh2001.prm392_beverages.data.AppDatabase;
 import com.phunlh2001.prm392_beverages.data.entities.Order;
+import com.phunlh2001.prm392_beverages.data.entities.User;
 import com.phunlh2001.prm392_beverages.data.entities.enums.OrderStatus;
+import com.phunlh2001.prm392_beverages.viewmodel.OrderInfo;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.OrderHistoryViewHolder>{
@@ -25,7 +29,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     String type;
     public IClickItem iClickItem;
     public interface IClickItem{
-        void onBindItem(Order order);
+        void onBindItem(List<OrderInfo> orderinfo, Order order);
     }
     public OrderHistoryAdapter(Context context, List<Order> mListOrder, String type, IClickItem iClickItem) {
         this.context = context;
@@ -50,16 +54,30 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     @Override
     public void onBindViewHolder(@NonNull OrderHistoryViewHolder holder, int position) {
         Order order = mListOrder.get(position);
+        User user = AppDatabase.getInstance(context.getApplicationContext()).userDao().getById(order.getUser_id());
+        List<OrderInfo> mListproduct = AppDatabase.getInstance(context.getApplicationContext()).orderDetailDao().getProductNameByOrderId(order.getId());
         holder.totalPrice.setText(Double.toString(order.getTotal_price()));
         if(order.getStatus().equals(OrderStatus.DELIVERY_FAILED)){
             holder.status.setText("Delivery failed");
             holder.status.setTextColor(Color.parseColor("#FF424E"));
             holder.status.setBackgroundResource(R.drawable.custom_text_status_failed);
         }
-        holder.linearLayout.setOnClickListener(v -> {
-            iClickItem.onBindItem(order);
-        });
 
+        String proName = "";
+        for(OrderInfo s: mListproduct){
+            proName += s.getTitle() + "(x" + s.getQuantity() + ")" + " ";
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        holder.totalPrice.setText(String.valueOf(order.getTotal_price()) + " đ");
+        holder.orderDate.setText(String.valueOf(formatter.format(order.getCreateAt())));
+        holder.location.setText(user.getAddress());
+        holder.listProduct.setText(String.valueOf(proName));
+
+
+        holder.linearLayout.setOnClickListener(v -> {
+            List<OrderInfo> mListOrder = AppDatabase.getInstance(v.getContext()).orderDetailDao().getProductNameByOrderId(order.getId());
+            iClickItem.onBindItem(mListOrder, order);
+        });
     }
 
     @Override
@@ -71,7 +89,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     }
 
     public class OrderHistoryViewHolder extends RecyclerView.ViewHolder{
-        TextView totalPrice;
+        TextView totalPrice, listProduct, orderDate, location;
         TextView status;
         LinearLayout linearLayout;
 
@@ -80,6 +98,9 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
 
             totalPrice = itemView.findViewById(R.id.totalPrice);
             status = itemView.findViewById(R.id.status_order);
+            listProduct = itemView.findViewById(R.id.listProduct);
+            orderDate = itemView.findViewById(R.id.order_date);
+            location = itemView.findViewById(R.id.location);
             linearLayout = itemView.findViewById(R.id.order_detail);
         }
     }

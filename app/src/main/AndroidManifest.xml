@@ -24,6 +24,17 @@
             android:name=".GetStartActivity"
             android:exported="false"/>
         <activity
+            android:name=".OrderDetail"
+            android:exported="false" />
+        <activity
+            android:name=".OrderHistory"
+            android:label="Order history"
+            android:parentActivityName=".OrderManagement" />
+        <activity
+            android:name=".OrderManagement"
+            android:label="Order"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -12,6 +12,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.phunlh2001.prm392_beverages.data.dao.CategoryDao;
 import com.phunlh2001.prm392_beverages.data.dao.OrderDao;
+import com.phunlh2001.prm392_beverages.data.dao.OrderDetailDao;
 import com.phunlh2001.prm392_beverages.data.dao.ProductDao;
 import com.phunlh2001.prm392_beverages.data.dao.UserDao;
 import com.phunlh2001.prm392_beverages.data.entities.Category;
@@ -66,4 +67,5 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract CategoryDao categoryDao();
     public abstract UserDao userDao();
     public abstract OrderDao orderDao();
+    public abstract OrderDetailDao orderDetailDao();
 }

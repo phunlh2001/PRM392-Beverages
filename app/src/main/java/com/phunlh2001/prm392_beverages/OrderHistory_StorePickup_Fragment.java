@@ -18,14 +18,18 @@ import com.phunlh2001.prm392_beverages.adapters.OrderHistoryAdapter;
 import com.phunlh2001.prm392_beverages.data.entities.Order;
 import com.phunlh2001.prm392_beverages.data.entities.enums.OrderStatus;
 import com.phunlh2001.prm392_beverages.data.entities.enums.OrderType;
+import com.phunlh2001.prm392_beverages.viewmodel.OrderInfo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderHistory_StorePickup_Fragment extends Fragment {
+    private static final int MY_REQUEST_CODE = 10;
     RecyclerView rcv;
     OrderHistoryAdapter orderHistoryAdapter;
     List<Order> mListOrder;
+
 
     public OrderHistory_StorePickup_Fragment(List<Order> mListOrder) {
         this.mListOrder = mListOrder;
@@ -44,8 +48,8 @@ public class OrderHistory_StorePickup_Fragment extends Fragment {
 
         orderHistoryAdapter = new OrderHistoryAdapter(getContext(), mListOrder, "STOREPICKUP", new OrderHistoryAdapter.IClickItem() {
             @Override
-            public void onBindItem(Order order) {
-                bindItemDetail(order);
+            public void onBindItem(List<OrderInfo> orderinfo, Order order) {
+                bindItemDetail(orderinfo, order);
             }
         });
         rcv = view.findViewById(R.id.rcv);
@@ -55,10 +59,13 @@ public class OrderHistory_StorePickup_Fragment extends Fragment {
         orderHistoryAdapter.notifyDataSetChanged();
     }
 
-    public void bindItemDetail(Order order){
-        Intent intent = new Intent(getActivity().getBaseContext(), OrderDetail.class);
-        intent.putExtra("message", String.valueOf(order.getStatus()));
-        getActivity().startActivity(intent);
+    public void bindItemDetail(List<OrderInfo> mListproduct, Order order){
+        Intent intent = new Intent(getActivity(), OrderDetail.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("order",(Serializable) order);
+        bundle.putSerializable("listProduct", (Serializable) mListproduct);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, MY_REQUEST_CODE);
     }
 
 }

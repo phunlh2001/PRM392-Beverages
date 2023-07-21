@@ -1,6 +1,11 @@
 package com.phunlh2001.prm392_beverages;
 
+import static com.phunlh2001.prm392_beverages.LoginActivity.KEY_LOGIN;
+import static com.phunlh2001.prm392_beverages.LoginActivity.PREF_LOGIN;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,8 +39,11 @@ public class OrderManagement extends AppCompatActivity {
         mTabLayout.addTab(mTabLayout.newTab().setText("Store pickup"));
         mTabLayout.addTab(mTabLayout.newTab().setText("Delivery"));
 
+        //Get email
+        SharedPreferences pref = getSharedPreferences(PREF_LOGIN, Context.MODE_PRIVATE);
+        String email = pref.getString(KEY_LOGIN, "");
         viewPager2= findViewById(R.id.view_pager);
-        viewPagerOrderManagementAdapter = new ViewPagerOrderManagementAdapter(this);
+        viewPagerOrderManagementAdapter = new ViewPagerOrderManagementAdapter(this, email);
         viewPager2.setAdapter(viewPagerOrderManagementAdapter);
 
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

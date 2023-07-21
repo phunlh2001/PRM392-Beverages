@@ -1,5 +1,8 @@
 package com.phunlh2001.prm392_beverages;
 
+import static com.phunlh2001.prm392_beverages.LoginActivity.KEY_LOGIN;
+import static com.phunlh2001.prm392_beverages.LoginActivity.PREF_LOGIN;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -7,6 +10,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +23,8 @@ import com.phunlh2001.prm392_beverages.adapters.ViewPagerOrderManagementAdapter;
 import com.phunlh2001.prm392_beverages.data.AppDatabase;
 import com.phunlh2001.prm392_beverages.data.entities.Category;
 import com.phunlh2001.prm392_beverages.data.entities.Order;
+import com.phunlh2001.prm392_beverages.data.entities.User;
+import com.phunlh2001.prm392_beverages.viewmodel.OrderInfo;
 
 import java.util.List;
 
@@ -25,6 +32,7 @@ public class OrderHistory extends AppCompatActivity {
     TabLayout mTabLayout;
     ViewPager2 viewPager2;
     ViewPagerOrderHistoryAdapter viewPagerOrderHistoryAdapter;
+    List<Order> mListOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +41,6 @@ public class OrderHistory extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         //Fragment
         //Test fragment order management
         mTabLayout = findViewById(R.id.tab_layout);
@@ -41,8 +48,11 @@ public class OrderHistory extends AppCompatActivity {
         mTabLayout.addTab(mTabLayout.newTab().setText("Store pickup"));
         mTabLayout.addTab(mTabLayout.newTab().setText("Delivery"));
 
+        SharedPreferences pref = getSharedPreferences(PREF_LOGIN, Context.MODE_PRIVATE);
+        String email = pref.getString(KEY_LOGIN, "");
+
         viewPager2= findViewById(R.id.view_pager);
-        viewPagerOrderHistoryAdapter = new ViewPagerOrderHistoryAdapter(this);
+        viewPagerOrderHistoryAdapter = new ViewPagerOrderHistoryAdapter(this, email);
         viewPager2.setAdapter(viewPagerOrderHistoryAdapter);
 
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

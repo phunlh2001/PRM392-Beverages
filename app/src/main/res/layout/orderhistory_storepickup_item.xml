@@ -51,6 +51,7 @@
                     </TextView>
 
                     <TextView
+                        android:id="@+id/order_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="20/04/2020, 04:20"
@@ -95,7 +96,7 @@
                         android:src="@drawable/img_clock"></ImageView>
 
                     <TextView
-                        android:id="@+id/time"
+                        android:id="@+id/location"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginStart="20dp"
