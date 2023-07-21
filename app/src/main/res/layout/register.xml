@@ -4,26 +4,19 @@
     android:id="@+id/RegisterActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="12dp"
     android:orientation="vertical"
-    android:gravity="center">
-
-    <TextView
-        android:layout_width="245dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Create Account Beverages :)"
-        android:textSize="32sp"
-        android:textStyle="bold" />
+    android:gravity="center"
+    android:background="@drawable/register_background">
 
     <EditText
         android:id="@+id/edtFullName"
         android:layout_width="332dp"
         android:layout_height="50dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="150dp"
         android:hint="Full name" />
 
     <EditText
+        android:layout_marginTop="10dp"
         android:id="@+id/edtEmail"
         android:layout_width="332dp"
         android:layout_height="50dp"
@@ -32,6 +25,7 @@
 
     <EditText
         android:id="@+id/edtPassword"
+        android:layout_marginTop="10dp"
         android:layout_width="334dp"
         android:layout_height="58dp"
         android:hint="Password"
@@ -39,6 +33,7 @@
 
     <EditText
         android:id="@+id/edtConfirmPassword"
+        android:layout_marginTop="10dp"
         android:layout_width="334dp"
         android:layout_height="58dp"
         android:hint="Confirm Password"
@@ -46,6 +41,7 @@
 
     <EditText
         android:id="@+id/edtPhone"
+        android:layout_marginTop="10dp"
         android:layout_width="334dp"
         android:layout_height="58dp"
         android:hint="Phone number"
@@ -53,16 +49,23 @@
 
     <EditText
         android:id="@+id/edtAddress"
+        android:layout_marginTop="10dp"
         android:layout_width="334dp"
         android:layout_height="58dp"
         android:hint="Address"
         android:inputType="text" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="Sign Up"
+        android:textColor="#ffff"
+        android:textSize="24dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:background="@drawable/custom_button_loginpage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Password" />
 </LinearLayout>
