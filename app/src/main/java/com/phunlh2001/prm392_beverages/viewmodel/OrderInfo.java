@@ -1,11 +1,8 @@
 package com.phunlh2001.prm392_beverages.viewmodel;
 
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-
 import java.io.Serializable;
 
-public class OrderInfo implements Serializable{
+public class OrderInfo implements Serializable {
     private String thumbnail;
     private String title;
     private String description;
@@ -26,10 +23,6 @@ public class OrderInfo implements Serializable{
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public OrderInfo(){
-
     }
 
     public String getThumbnail() {

@@ -1,7 +1,7 @@
 package com.phunlh2001.prm392_beverages;
 
-import static com.phunlh2001.prm392_beverages.LoginActivity.KEY_LOGIN;
-import static com.phunlh2001.prm392_beverages.LoginActivity.PREF_LOGIN;
+import static com.phunlh2001.prm392_beverages.utils.Constant.KEY_LOGIN;
+import static com.phunlh2001.prm392_beverages.utils.Constant.PREF_LOGIN;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,12 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.phunlh2001.prm392_beverages.adapters.ViewPagerOrderHistoryAdapter;
-import com.phunlh2001.prm392_beverages.adapters.ViewPagerOrderManagementAdapter;
-import com.phunlh2001.prm392_beverages.data.AppDatabase;
-import com.phunlh2001.prm392_beverages.data.entities.Category;
 import com.phunlh2001.prm392_beverages.data.entities.Order;
-import com.phunlh2001.prm392_beverages.data.entities.User;
-import com.phunlh2001.prm392_beverages.viewmodel.OrderInfo;
 
 import java.util.List;
 

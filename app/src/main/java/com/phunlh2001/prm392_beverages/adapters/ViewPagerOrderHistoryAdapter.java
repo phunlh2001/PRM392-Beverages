@@ -1,17 +1,12 @@
 package com.phunlh2001.prm392_beverages.adapters;
 
-import static com.phunlh2001.prm392_beverages.LoginActivity.KEY_LOGIN;
-import static com.phunlh2001.prm392_beverages.LoginActivity.PREF_LOGIN;
-
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.phunlh2001.prm392_beverages.Delivery_Preparing_Fragment;
 import com.phunlh2001.prm392_beverages.OrderHistory_Delivery_Fragment;
 import com.phunlh2001.prm392_beverages.OrderHistory_StorePickup_Fragment;
 import com.phunlh2001.prm392_beverages.Store_pickup_No_Order_Fragment;

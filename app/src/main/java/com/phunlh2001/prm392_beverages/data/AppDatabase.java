@@ -10,6 +10,7 @@ import androidx.room.TypeConverters;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.phunlh2001.prm392_beverages.data.dao.CartDao;
 import com.phunlh2001.prm392_beverages.data.dao.CategoryDao;
 import com.phunlh2001.prm392_beverages.data.dao.OrderDao;
 import com.phunlh2001.prm392_beverages.data.dao.OrderDetailDao;
@@ -68,4 +69,5 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract OrderDao orderDao();
     public abstract OrderDetailDao orderDetailDao();
+    public abstract CartDao cartDao();
 }
