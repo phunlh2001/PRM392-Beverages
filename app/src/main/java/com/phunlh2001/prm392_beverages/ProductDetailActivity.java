@@ -10,10 +10,8 @@ import com.phunlh2001.prm392_beverages.data.AppDatabase;
 import com.phunlh2001.prm392_beverages.data.dao.ProductDao;
 import com.phunlh2001.prm392_beverages.data.entities.Product;
 
-import java.util.List;
-
 public class ProductDetailActivity extends AppCompatActivity {
-    private List<Product> productQuery;
+    private Product productQuery;
     private Product product;
     private TextView tvName;
     private TextView tvPrice;
@@ -56,15 +54,15 @@ public class ProductDetailActivity extends AppCompatActivity {
     //lay du lieu thong qua id
     private void retrieveDataFromDBtoUI(int ID) {
         try {
-             productQuery = (List<Product>) productDao.getById(ID);
+             productQuery = (Product) productDao.getById(ID);
 
             if (productQuery != null) {
                 // fill data to UI
-                for (Product productItems : productQuery) {
-                    tvName.setText(productItems.getTitle());
-                    tvPrice.setText(Double.toString(productItems.getPrice()));
-                    tvDes.setText(productItems.getDesc());
-                }
+
+                    tvName.setText(productQuery.getTitle());
+                    tvPrice.setText(Double.toString(productQuery.getPrice()));
+                    tvDes.setText(productQuery.getDesc());
+
             } else Toast.makeText(this, "Error: Data is NULL", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(this, "Error" + e.toString(), Toast.LENGTH_SHORT).show();
