@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
@@ -98,9 +99,10 @@ public class OrderHistory extends AppCompatActivity {
             finish();
         }
         if (id == R.id.action1) {
-            Toast.makeText(this, "Action 1 clicked", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.action2) {
-            Toast.makeText(this, "Action 2 clicked", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
+            SharedPreferences pref = getSharedPreferences(PREF_LOGIN, Context.MODE_PRIVATE);
+            pref.edit().remove(KEY_LOGIN).commit();
+            startActivity(new Intent(this, LoginActivity.class));
         } else if (id == R.id.exit) {
             Toast.makeText(this, "Exit", Toast.LENGTH_SHORT).show();
         }

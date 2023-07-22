@@ -7,11 +7,8 @@
         android:icon="@drawable/ic_dot"
         app:showAsAction="ifRoom">
         <menu>
-            <item android:title="Action1"
+            <item android:title="Logout"
                 android:id="@+id/action1">
-            </item>
-            <item android:title="Action2"
-                android:id="@+id/action2">
             </item>
         </menu>
     </item>

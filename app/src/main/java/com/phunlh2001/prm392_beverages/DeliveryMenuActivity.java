@@ -3,6 +3,7 @@ package com.phunlh2001.prm392_beverages;
 import static com.phunlh2001.prm392_beverages.utils.Constant.KEY_LOGIN;
 import static com.phunlh2001.prm392_beverages.utils.Constant.PREF_LOGIN;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,8 +13,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.phunlh2001.prm392_beverages.adapters.CategoryAdapter;
 import com.phunlh2001.prm392_beverages.adapters.ProductMenuAdapter;
@@ -71,6 +75,8 @@ public class DeliveryMenuActivity extends AppCompatActivity {
             Intent intent = new Intent(DeliveryMenuActivity.this, AddressSelectorActivity.class);
             startActivity(intent);
         });
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void recyclerViewCategory() {
@@ -111,5 +117,32 @@ public class DeliveryMenuActivity extends AppCompatActivity {
             tvName.setText(user.getFull_name());
             tvPhone.setText(user.getPhone_number());
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.home_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id == android.R.id.home){
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.search) {
+            Intent intent = new Intent(this, SearchProductActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.action1) {
+            Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
+            SharedPreferences pref = getSharedPreferences(PREF_LOGIN, Context.MODE_PRIVATE);
+            pref.edit().remove(KEY_LOGIN).commit();
+            startActivity(new Intent(this, LoginActivity.class));
+        } else if (id == R.id.exit) {
+            Toast.makeText(this, "Exit", Toast.LENGTH_SHORT).show();
+        }
+        return true;
     }
 }

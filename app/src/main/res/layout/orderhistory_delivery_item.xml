@@ -68,7 +68,7 @@
 
                     <ImageView
                         android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_height="35dp"
                         android:src="@drawable/img_home"></ImageView>
 
                     <TextView
@@ -77,7 +77,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="20dp"
                         android:gravity="center"
-                        android:text="13 Han Thuyen, D.1, HCM city">
+                        android:text="@string/address_store_pickup">
 
                     </TextView>
                 </LinearLayout>
