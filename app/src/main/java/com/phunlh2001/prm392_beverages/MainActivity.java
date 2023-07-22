@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, GetStartActivity.class);
             startActivity(intent);
         } else {
-            Intent intent = new Intent(MainActivity.this, CartActivity.class);
+            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
         }
     }

@@ -15,6 +15,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.phunlh2001.prm392_beverages.adapters.CategoryAdapter;
@@ -30,6 +31,7 @@ import java.util.List;
 public class StoreMenuActivity extends AppCompatActivity {
 
     private RecyclerView rcvMenu, rcvCate;
+    private TextView btnCart;
     private ProductMenuAdapter productMenuAdapter;
     private CategoryAdapter categoryAdapter;
     private ProductDao productDao;
@@ -37,6 +39,7 @@ public class StoreMenuActivity extends AppCompatActivity {
     private void initialize() {
         rcvMenu = findViewById(R.id.rcv_menu);
         rcvCate = findViewById(R.id.rcv_cates);
+        btnCart = findViewById(R.id.btn_store_cart);
         productMenuAdapter = new ProductMenuAdapter(this);
         categoryAdapter = new CategoryAdapter(this);
         productDao = AppDatabase.getInstance(this).productDao();
@@ -51,6 +54,12 @@ public class StoreMenuActivity extends AppCompatActivity {
         recyclerViewCategory();
         recyclerViewProduct();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        btnCart.setOnClickListener(v -> {
+            Intent intent = new Intent(StoreMenuActivity.this, CartActivity.class);
+            startActivity(intent);
+            finish();
+        });
     }
 
     private void recyclerViewCategory() {
