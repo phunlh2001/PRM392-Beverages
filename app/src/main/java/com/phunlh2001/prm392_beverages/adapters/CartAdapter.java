@@ -1,5 +1,7 @@
 package com.phunlh2001.prm392_beverages.adapters;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,86 +18,62 @@ import com.phunlh2001.prm392_beverages.data.entities.Product;
 
 import java.util.List;
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHodler>{
-    private CartClickedListeners cartClickedListeners;
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder>{
+    private final Context context;
 
     private List<Product> productList;
-    private List<OrderDetail> orderDetailList;
 
-    public CartAdapter(CartClickedListeners cartClickedListeners) {
-        this.cartClickedListeners = cartClickedListeners;
+    public CartAdapter(Context context) {
+        this.context = context;
     }
-    public void setProductCartList(List<OrderDetail> orderDetailList) {
-        this.orderDetailList = orderDetailList;
-        notifyDataSetChanged();
+
+    public void setDataProducts(List<Product> products) {
+        productList = products;
     }
+
     @NonNull
     @Override
-    public CartViewHodler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item, parent, false);
-        return new CartViewHodler(view);
+        return new CartViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull CartViewHodler holder, int position) {
+    public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         Product product = productList.get(position);
-        OrderDetail orderDetail = orderDetailList.get(position);
 
-        holder.ivCartItemImg.setImageDrawable(Drawable.createFromPath(product.getThumbnail()));
+        @SuppressLint("DiscouragedApi")
+        int resourceId = context.getResources()
+                .getIdentifier(product.getThumbnail(), "drawable", context.getPackageName());
+
+        holder.ivCartItemImg.setImageResource(resourceId);
         holder.tvCartTitle.setText(product.getTitle());
-        holder.tvCartQuantity.setText(orderDetail.getQuantity() + "");
-
-        holder.ivCartDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cartClickedListeners.onDeleteClicked(orderDetail);
-            }
-        });
-
-
-        holder.ivPlusItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cartClickedListeners.onPlusClicked(orderDetail);
-            }
-        });
-
-        holder.ivMinusItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cartClickedListeners.onMinusClicked(orderDetail);
-            }
-        });
+        holder.tvCartDesc.setText(product.getDesc());
+        holder.tvCartPrice.setText(product.getPrice() + "");
+        holder.tvCartQuantity.setText("1");
     }
 
     @Override
     public int getItemCount() {
-        if (orderDetailList == null) {
-            return 0;
-        } else {
-            return orderDetailList.size();
-        }
+        return productList != null ? productList.size() : 0;
     }
 
-    public class CartViewHodler extends RecyclerView.ViewHolder {
-        private TextView tvCartTitle, tvCartPrice, tvCartQuantity;
-        private ImageView ivCartItemImg, ivCartDelete, ivPlusItem, ivMinusItem;
-        public CartViewHodler(@NonNull View itemView) {
+    public static class CartViewHolder extends RecyclerView.ViewHolder {
+        TextView tvCartTitle, tvCartPrice, tvCartQuantity, tvCartDesc;
+        ImageView ivCartItemImg, ivCartDelete, ivPlusItem, ivMinusItem;
+        public CartViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            tvCartDesc = itemView.findViewById(R.id.tvCartDesc);
             tvCartTitle = itemView.findViewById(R.id.tvCartTitle);
             tvCartPrice = itemView.findViewById(R.id.tvCartPrice);
-            tvCartQuantity = itemView.findViewById(R.id.tvCartQuantity);
-            ivCartDelete = itemView.findViewById(R.id.ivCartDelete);
             ivCartItemImg = itemView.findViewById(R.id.ivCartItemImg);
+            tvCartQuantity = itemView.findViewById(R.id.tvCartQuantity);
+
+            ivCartDelete = itemView.findViewById(R.id.ivCartDelete);
             ivPlusItem = itemView.findViewById(R.id.ivPlusItem);
             ivMinusItem = itemView.findViewById(R.id.ivMinusItem);
         }
-    }
-
-    public interface CartClickedListeners {
-        void onDeleteClicked(OrderDetail orderDetail);
-        void onPlusClicked(OrderDetail orderDetail);
-        void onMinusClicked(OrderDetail orderDetail);
     }
 }

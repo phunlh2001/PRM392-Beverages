@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f5f5fa"
@@ -129,7 +128,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/general_bg"
@@ -137,19 +136,18 @@
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvCart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/rcvCart">
+            android:layout_height="289dp" />
 
-        </androidx.recyclerview.widget.RecyclerView>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/layoutTotalPrice">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/price"
@@ -171,7 +169,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/shippingFee"
@@ -187,13 +185,13 @@
                     android:layout_gravity="right"
                     android:gravity="right"
                     android:textStyle="bold"
-                    android:text="30.000 ₫"
+                    android:text="130.000 ₫"
                     android:textColor="@color/black" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/total"
@@ -209,25 +207,18 @@
                     android:layout_gravity="right"
                     android:gravity="right"
                     android:textStyle="bold"
-                    android:text="30.000 ₫"
+                    android:text="130.000 ₫"
                     android:textColor="@color/black" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <android.widget.Button
+        android:id="@+id/btnCheckout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnCheckout"
-            android:layout_width="390dp"
-            android:layout_height="55dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/pay_btn"
-            android:text="Pay"
-            android:textColor="@color/white" />
-    </LinearLayout>
+        android:background="@drawable/custom_button"
+        android:gravity="center"
+        android:text="Checkout" />
 
 </LinearLayout>

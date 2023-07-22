@@ -6,4 +6,7 @@ public class Constant {
 
     public static final String PREF_ADDRESS = "pref_address";
     public static final String KEY_ADDRESS = "address";
+
+    public static final String PREF_CART = "pref_cart";
+    public static final String KEY_CART = "cart_obj";
 }

@@ -1,8 +1,12 @@
 package com.phunlh2001.prm392_beverages.adapters;
 
+import static com.phunlh2001.prm392_beverages.utils.Constant.KEY_CART;
+import static com.phunlh2001.prm392_beverages.utils.Constant.PREF_CART;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +19,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.phunlh2001.prm392_beverages.ProductDetailActivity;
 import com.phunlh2001.prm392_beverages.R;
+import com.phunlh2001.prm392_beverages.data.entities.OrderDetail;
 import com.phunlh2001.prm392_beverages.data.entities.Product;
+import com.phunlh2001.prm392_beverages.viewmodel.AddressViewModel;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductMenuAdapter extends RecyclerView.Adapter<ProductMenuAdapter.MenuViewHolder> {
@@ -63,8 +73,14 @@ public class ProductMenuAdapter extends RecyclerView.Adapter<ProductMenuAdapter.
         });
         
         holder.btnAddToCart.setOnClickListener(view -> {
-            // cart.insert(prod.get(position));
-            Toast.makeText(context, "Add to cart successfully", Toast.LENGTH_SHORT).show();
+            try {
+                _products = getList();
+                _products.add(prod);
+                setList(_products);
+                Toast.makeText(context, "Add to cart successfully", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                Toast.makeText(context, "Add to cart failed", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -87,5 +103,28 @@ public class ProductMenuAdapter extends RecyclerView.Adapter<ProductMenuAdapter.
             btnAddToCart = itemView.findViewById(R.id.btnAddToCart);
             btnDetail = itemView.findViewById(R.id.btnDetail);
         }
+    }
+
+    private void setList(List<Product> list) {
+        SharedPreferences pref = context.getSharedPreferences(PREF_CART, Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = pref.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+
+        editor.putString(KEY_CART, json);
+        editor.apply();
+    }
+
+    private List<Product> getList() {
+        SharedPreferences pref = context.getSharedPreferences(PREF_CART, Context.MODE_PRIVATE);
+        List<Product> arrItems = new ArrayList<>();
+        String json = pref.getString(KEY_CART, null);
+        if (json != null) {
+            Gson gson = new Gson();
+            Type type = new TypeToken<List<Product>>(){}.getType();
+            arrItems = gson.fromJson(json, type);
+        }
+        return arrItems;
     }
 }
